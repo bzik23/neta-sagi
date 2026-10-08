@@ -34,7 +34,7 @@ LEGAL_CSS = """
 .legal .box{background:var(--sky-2);border:1px solid var(--sky);border-radius:var(--radius);padding:16px 18px;margin:18px 0}
 .legal .back{display:inline-flex;align-items:center;gap:8px;margin-top:30px;font-weight:700;text-decoration:none}
 .legal .back svg{width:18px;height:18px}
-@media (max-width:720px){.legal{padding-top:104px}}
+@media (max-width:720px){.top{display:block}.legal{padding-top:104px}} /* the landing page hides the header on phones; here it is the way back home */
 </style>
 """
 
