@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הצהרת נגישות | נטע שגיא</title>
+<meta name="description" content="הצהרת הנגישות של אתר נטע שגיא - חקירות, מודיעין ופוליגרף: התקן, ההתאמות שבוצעו ודרכי פנייה.">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="assets/favicon.png">
+<meta property="og:title" content="נטע שגיא | משרד חקירות, דיבוב ומעקבים">
+<meta property="og:description" content="מרגישים שמישהו מסתיר מכם משהו? יוצאי שב״כ ומשטרה, 30 שנות ניסיון, חשאיות מוחלטת.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ---- palette: blue (after hefets.co.il) with orange touches - chosen 2026-10-08 ---- */
+  --blue:#197EB4;        /* primary: cards, icons, badges */
+  --blue-h:#1670A2;      /* primary hover */
+  --cta:#197EB4;         /* main CTA buttons */
+  --cta-h:#1670A2;
+  --blue-d:#437D98;      /* steel blue: headings, dark boxes */
+  --blue-dd:#2B5A72;     /* darker steel for small emphasis */
+  --orange:#F37A20;      /* orange touches: round stamp, form submit, step numbers */
+  --orange-h:#DD6A14;
+  --cyan:#F37A20;        /* accent touch: small labels, overline dash, question box (orange) */
+  --teal:#279F8C;        /* success/check touch */
+  --sky:#97C8DD;         /* light: borders, chips */
+  --sky-2:#E6F1F7;       /* tint: section surfaces */
+  --sky-3:#F3F8FB;       /* lightest tint: cards */
+  --tint:rgba(25,126,180,.32);   /* color wash over the hero video */
+  --shadow-c:14,60,90;           /* rgb triple for shadows */
+  --text:#2E3A48;
+  --muted:#5E6B7A;
+  --line:rgba(67,125,152,.28);
+  --wa:#25D366;
+  --radius:16px;
+  --font:"Open Sans","Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font);font-weight:400;color:var(--text);background:#fff;line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--font);font-stretch:75%;font-weight:800;line-height:1.15;margin:0;color:var(--blue-d)}
+p{margin:0}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.num{font-variant-numeric:tabular-nums;unicode-bidi:isolate;direction:ltr;display:inline-block}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:12px;font-weight:700;font-size:1.02rem;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;line-height:1;min-height:50px;white-space:nowrap;font-family:inherit}
+.btn:active{transform:translateY(1px)}
+.btn-blue{background:var(--cta);color:#fff;box-shadow:0 8px 18px -10px rgba(var(--shadow-c),.6)}
+.btn-blue:hover{background:var(--cta-h);transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(var(--shadow-c),.7)}
+.btn-orange{background:var(--orange);color:#fff;box-shadow:0 8px 18px -10px rgba(var(--shadow-c),.6)}
+.btn-orange:hover{background:var(--orange-h);transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(var(--shadow-c),.7)}
+.btn-ghost{background:#fff;border-color:var(--blue);color:var(--blue)}
+.btn-ghost:hover{background:var(--sky-2)}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-wa:hover{background:#1FBF5B;transform:translateY(-2px)}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* ---------- header ---------- */
+.top{position:absolute;top:0;inset-inline:0;z-index:50}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:84px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:46px;height:46px;flex:none}
+.brand .t{display:flex;flex-direction:column;line-height:1}
+.brand b{font-weight:800;font-stretch:75%;font-size:1.7rem;color:var(--blue-d);letter-spacing:-.01em}
+.brand small{font-weight:600;font-size:.62rem;letter-spacing:.22em;color:var(--blue);margin-top:5px}
+.top .phone{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:1.15rem;color:var(--blue);padding:8px 14px;border-radius:12px;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border:1px solid var(--line)}
+.top .phone svg{width:22px;height:22px;color:var(--blue)}
+/* header trust chip beside the phone: "veterans of Shin Bet and police" with a neutral shield (no official state emblems) */
+.hdr-cta{display:flex;align-items:center;gap:10px}
+.top .hdr-trust{display:inline-flex;align-items:center;gap:7px;font-size:.84rem;font-weight:700;color:var(--blue-d);padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border:1px solid var(--line);white-space:nowrap}
+.top .hdr-trust svg{width:18px;height:18px;color:var(--blue);flex:none}
+/* phones: the number stays visible, to the right of the dial icon (client, 2026-10-08) */
+@media (max-width:720px){.top .phone{padding:8px 12px;font-size:1.02rem;gap:7px;flex-direction:row-reverse}.top .phone svg{width:20px;height:20px}.top .hdr-trust{display:none}.brand small{display:none}.brand b{font-size:1.4rem}.brand svg{width:38px;height:38px}}
+
+/* ---------- screen 1: hero ---------- */
+.hero{position:relative;isolation:isolate;overflow:hidden;min-height:100svh;display:flex;align-items:center;padding:92px 0 92px;background:linear-gradient(180deg,var(--sky-3) 0%,#fff 100%)}
+.hero-video-bg{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.hero-video-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:34% center;filter:saturate(.55) contrast(.95)}
+.hero-video-bg .hero-video-fill{transform:scale(1.16);filter:blur(30px) saturate(.6);opacity:.3}
+/* desktop: the clip lives on the LEFT part of the hero only (the empty column beside the text),
+   with soft edges that melt into the light background; the blurred fill stays as a faint wash */
+.hero-video-bg .hero-video{right:auto;left:0;width:50%;object-fit:contain;object-position:50% 50%;
+  /* contain (not cover): the whole frame is shown a little smaller instead of being cropped at the sides -
+     in part 2 the investigator stands at the right edge of the frame (client, 2026-10-08). The right fade
+     starts late so he stays visible; the vertical fade is wide enough to melt the frame's top/bottom edges */
+  -webkit-mask-image:linear-gradient(to right,#000 0%,#000 78%,rgba(0,0,0,0) 100%),linear-gradient(to bottom,rgba(0,0,0,0) 6%,#000 28%,#000 72%,rgba(0,0,0,0) 94%);
+  mask-image:linear-gradient(to right,#000 0%,#000 78%,rgba(0,0,0,0) 100%),linear-gradient(to bottom,rgba(0,0,0,0) 6%,#000 28%,#000 72%,rgba(0,0,0,0) 94%);
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+/* blue tint + white scrim on the text side (right in RTL) */
+.hero-video-bg::before{content:"";position:absolute;inset:0;background:var(--tint);mix-blend-mode:multiply}
+.hero-video-bg::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(to left,rgba(255,255,255,.98) 0%,rgba(255,255,255,.93) 30%,rgba(255,255,255,.6) 54%,rgba(255,255,255,.2) 76%,rgba(255,255,255,.05) 100%),
+  linear-gradient(to top,#fff 0%,rgba(255,255,255,0) 30%),
+  linear-gradient(to bottom,rgba(255,255,255,.85) 0%,rgba(255,255,255,0) 22%)}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,660px) 1fr;gap:40px;align-items:center}
+.overline{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;color:var(--blue);letter-spacing:.02em;font-weight:700}
+.overline::before{content:"";width:28px;height:2px;background:var(--cyan);flex:none;border-radius:2px}
+/* hero trust line: plain text with the orange dash, like the other section overlines (the white pill was removed 2026-10-08 per the client) */
+.hero .overline{font-size:1rem;color:var(--blue-dd)}
+/* a soft light wave sweeping over the letters, right to left (reading direction), then a pause */
+.hero .overline .wave-text{display:inline-block;background-image:linear-gradient(100deg,var(--blue-dd) 0%,var(--blue-dd) 44%,#BFE3F7 50%,var(--blue-dd) 56%,var(--blue-dd) 100%);background-size:250% 100%;background-position:0 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:textwave 4.6s ease-in-out infinite}
+@keyframes textwave{0%{background-position:0 0}42%,100%{background-position:100% 0}}
+.hero h1{font-size:clamp(2.2rem,4.4vw,3.6rem);margin:12px 0 14px;letter-spacing:-.01em;line-height:1.12}
+.hero .tagline{font-size:clamp(1rem,1.3vw,1.15rem);font-weight:600;color:var(--blue-d);line-height:1.5;margin:0 0 14px;max-width:62ch;text-wrap:pretty}
+.hero h1 .sep{color:var(--sky);font-weight:300;margin:0 .1em}
+.hero .ask{display:inline-block;font-stretch:75%;font-weight:800;font-size:clamp(1.35rem,2.4vw,1.85rem);line-height:1.25;color:var(--blue-d);background:var(--sky-2);border-inline-start:5px solid var(--cyan);padding:10px 16px;border-radius:0 12px 12px 0;margin-bottom:14px}
+.hero .lead{font-size:1.06rem;color:var(--muted);max-width:58ch}
+.hero .lead strong{color:var(--blue-d);font-weight:700}
+/* "סודיות וחשאיות מוחלטת": an orange marker stroke draws itself under the words, right to left, once on load */
+.hero .lead .hl{font-weight:800;color:var(--blue-dd);white-space:nowrap;padding:0 .15em;margin:0 -.15em;border-radius:4px;background-image:linear-gradient(transparent 55%,rgba(243,122,32,.3) 55%,rgba(243,122,32,.3) 94%,transparent 94%);background-repeat:no-repeat;background-size:0% 100%;background-position:100% 0;animation:hl-draw .9s cubic-bezier(.2,.7,.2,1) 1.4s forwards}
+@keyframes hl-draw{to{background-size:100% 100%}}
+.counters{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 34px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.counters b{font-stretch:75%;font-size:clamp(2rem,3.6vw,3rem);font-weight:800;color:var(--blue);line-height:1;display:block;direction:ltr;text-align:right}
+.counters span{font-size:.92rem;color:var(--muted);display:block;margin-top:4px;font-weight:600}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:.86rem;font-weight:600;color:var(--blue-d);padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.85)}
+.badge svg{width:16px;height:16px;color:var(--blue);flex:none}
+.badge.lic{text-decoration:none;cursor:zoom-in;padding-inline-start:6px;border-color:var(--blue);background:#fff}
+.badge.lic img{width:22px;height:28px;object-fit:cover;object-position:top;border-radius:3px;border:1px solid var(--sky)}
+.badge.lic:hover{background:var(--sky-2)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.whisper{margin-top:16px;font-size:1rem;color:var(--blue-d);display:flex;gap:9px;align-items:center;line-height:1.4}
+.whisper strong{font-weight:700;color:var(--blue-dd)}
+.whisper svg{width:18px;height:18px;color:var(--blue);flex:none}
+/* hero testimonials slider: one quote at a time, cross-fade, auto-advance (paused on hover/focus) */
+.tst{margin-top:18px;max-width:600px;background:rgba(255,255,255,.78);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px 10px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.tst-track{display:grid}
+.tst-item{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s}
+.tst-item.is-on{opacity:1;visibility:visible}
+.tst-item blockquote{margin:0;font-size:.97rem;line-height:1.55;color:var(--text);font-weight:500}
+.tst-item figcaption{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:.86rem;color:var(--blue-d);font-weight:700}
+.tst-stars{color:#F2A900;letter-spacing:.08em;font-size:.9rem}
+.tst-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
+.tst-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--blue);display:grid;place-items:center;cursor:pointer;padding:0;transition:background .2s ease,color .2s ease}
+.tst-btn:hover{background:var(--blue);color:#fff}
+.tst-btn svg{width:16px;height:16px}
+.tst-dots{display:flex;gap:7px}
+.tst-dot,.why-dot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--sky);cursor:pointer;transition:background .2s ease,transform .2s ease}
+.tst-dot.is-on,.why-dot.is-on{background:var(--blue);transform:scale(1.25)}
+.why-dots{display:none}
+.watch-btn{display:none;align-items:center;gap:10px;margin-top:16px;background:none;border:0;color:var(--blue-d);font:inherit;font-weight:700;cursor:pointer;padding:0}
+.watch-btn i{width:46px;height:46px;border-radius:50%;background:var(--blue);display:grid;place-items:center;transition:transform .2s ease}
+.watch-btn i svg{width:18px;height:18px;color:#fff;margin-inline-start:3px}
+.watch-btn:hover i{transform:scale(1.06)}
+.watch-btn.show{display:inline-flex}
+/* round promise badge over the video, like a stamp (the hero license card was removed 2026-10-08 per the client) */
+.stamp{position:absolute;z-index:3;left:calc(7% + 170px);top:calc(50% + 110px);width:156px;height:156px;border-radius:50%;background:var(--orange);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 18px 40px -16px rgba(var(--shadow-c),.55),0 0 0 8px rgba(255,255,255,.55);padding:14px;line-height:1.15}
+.stamp b{font-stretch:75%;font-weight:800;font-size:1.3rem;display:block}
+.stamp i{font-style:italic;font-weight:600;font-size:.98rem;display:block;margin-bottom:4px}
+.stamp small{display:flex;align-items:center;gap:5px;font-size:.78rem;margin-top:8px;font-weight:600;opacity:.95}
+.stamp small svg{width:13px;height:13px}
+.scroll-cue{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:2;color:var(--blue);font-size:.78rem;font-weight:700;letter-spacing:.1em;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none}
+.scroll-cue svg{width:18px;height:18px;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ---------- screen 2: info ---------- */
+.info{background:#fff;min-height:100svh;display:flex;align-items:center;padding:72px 0}
+.info .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
+.sec-head{margin-bottom:20px}
+.sec-head .overline{margin-bottom:10px}
+.sec-head h2{font-size:clamp(1.7rem,3vw,2.4rem)}
+.sec-head p{color:var(--muted);margin-top:8px;font-size:1rem}
+.svcs{display:grid;gap:12px}
+.svc{display:flex;gap:16px;align-items:flex-start;background:var(--sky-3);border:1.5px solid var(--sky);border-radius:16px;padding:18px 18px 16px;transition:transform .2s ease,box-shadow .2s ease}
+.svc:hover{transform:translateY(-2px);box-shadow:0 16px 32px -22px rgba(var(--shadow-c),.45)}
+.svc .ic{flex:none;width:54px;height:54px;border-radius:14px;background:var(--blue);display:grid;place-items:center}
+.svc .ic svg{width:28px;height:28px;color:#fff}
+.svc h3{font-size:1.35rem;margin-bottom:4px}
+.svc p{color:var(--muted);font-size:.95rem;line-height:1.5}
+.svc.lead{background:var(--blue-d);border-color:var(--blue-d)}
+.svc.lead h3{color:#fff}
+.svc.lead p{color:#E6F1F7}
+.svc.lead .ic{background:#fff}
+.svc.lead .ic svg{color:var(--blue-d)}
+.svc .k{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.12em;color:#fff;background:var(--cyan);padding:3px 9px;border-radius:6px;margin-bottom:6px}
+.cta-box{display:flex;align-items:center;gap:16px;justify-content:space-between;background:var(--sky-2);border-radius:14px;padding:16px 18px;margin:0 0 12px}
+.cta-box b{display:block;color:var(--blue-d);font-weight:800;font-stretch:75%;font-size:1.25rem;line-height:1.2}
+.cta-box span{color:var(--muted);font-size:.92rem;display:block;margin-top:4px}
+.cta-box .btn{flex:none}
+.why{list-style:none;margin:0 0 14px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.why li{background:var(--blue);color:#fff;border-radius:16px;padding:18px 16px 16px;display:flex;flex-direction:column;gap:8px;transition:transform .2s ease,box-shadow .2s ease}
+.why li:hover{transform:translateY(-3px);box-shadow:0 18px 36px -20px rgba(var(--shadow-c),.6)}
+.why .ic{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.16);display:grid;place-items:center}
+.why .ic svg{width:24px;height:24px;color:#fff}
+.why b{display:block;font-stretch:75%;font-weight:800;font-size:1.25rem;line-height:1.15}
+.why span{font-size:.9rem;line-height:1.45;color:#E6F3FA}
+.license{display:flex;gap:16px;align-items:center;margin-top:0;background:#fff;border:1.5px solid var(--sky);border-radius:14px;padding:12px 14px;text-decoration:none;cursor:zoom-in;transition:box-shadow .2s ease,border-color .2s ease}
+.license:hover{border-color:var(--blue);box-shadow:0 16px 32px -22px rgba(var(--shadow-c),.5)}
+.license img{width:96px;height:auto;border-radius:6px;border:1px solid var(--sky);box-shadow:0 6px 14px -8px rgba(0,0,0,.35);flex:none}
+.license b{display:block;font-weight:800;font-stretch:75%;font-size:1.2rem;color:var(--blue-d);line-height:1.2}
+.license span{color:var(--muted);font-size:.86rem;display:block;margin-top:3px}
+.license .zoom{display:inline-flex;align-items:center;gap:5px;font-size:.8rem;color:var(--blue);font-weight:700;margin-top:6px}
+.license .zoom svg{width:14px;height:14px}
+
+/* ---------- screen 3: contact ---------- */
+.contact{position:relative;min-height:100svh;display:flex;align-items:center;padding:72px 0 40px;background:var(--sky-2)}
+.contact .wrap{position:relative;display:grid;grid-template-columns:.95fr 1.05fr;gap:48px;align-items:center}
+.card{position:relative;background:#fff;border-radius:var(--radius);padding:28px;box-shadow:0 30px 60px -36px rgba(var(--shadow-c),.5);border:1px solid var(--sky-2)}
+.tab{position:absolute;top:-14px;inset-inline-start:22px;background:var(--cyan);color:#fff;font-size:.76rem;font-weight:800;letter-spacing:.12em;padding:5px 12px;border-radius:6px}
+.card h2{font-size:1.6rem;margin-bottom:4px}
+.card .sub{color:var(--muted);font-size:.95rem;margin-bottom:18px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:6px;font-weight:600}
+.field input,.field select{width:100%;background:#fff;border:1.5px solid var(--sky);color:var(--text);border-radius:10px;padding:13px 14px;font:inherit;font-size:1rem;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
+.field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--sky-2)}
+.field input[type=tel],.field input[type=email]{direction:ltr;text-align:right}
+.field label .opt{font-weight:500;opacity:.8}
+.field select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235E6B7A' stroke-width='2.5'><path d='m6 9 6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:left 14px center;padding-inline-start:38px}
+.field .err{display:none;color:#C62828;font-size:.82rem;margin-top:6px}
+.field.invalid input{border-color:#E06C6C}
+.field.invalid .err{display:block}
+.form-foot{display:flex;align-items:flex-start;gap:10px;font-size:.8rem;color:var(--muted);margin-top:12px;line-height:1.4}
+.form-foot svg{width:16px;height:16px;flex:none;color:var(--blue);margin-top:2px}
+/* required privacy consent */
+.field.consent{margin:4px 0 14px}
+.field.consent .check{display:flex;align-items:flex-start;gap:9px;font-size:.86rem;font-weight:500;color:var(--text);line-height:1.45;cursor:pointer}
+.field.consent input{width:18px;height:18px;margin:2px 0 0;padding:0;border:0;border-radius:4px;background:none;box-shadow:none;flex:none;accent-color:var(--blue);cursor:pointer}
+.field.consent input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.field.consent.invalid .check{color:#C62828}
+.field.consent a{color:var(--blue);text-decoration:underline;text-underline-offset:2px}
+.field.consent .req{color:var(--orange);font-weight:800}
+.form .btn{width:100%;font-size:1.06rem}
+.done{display:none;text-align:center;padding:26px 6px}
+.done .ok{width:62px;height:62px;border-radius:50%;background:#E7F6F2;display:grid;place-items:center;margin:0 auto 14px}
+.done .ok svg{width:30px;height:30px;color:var(--teal)}
+.done h3{font-size:1.4rem;margin-bottom:6px}
+.done p{color:var(--muted)}
+.form.sent form{display:none}.form.sent .done{display:block}
+.contact .side h2{font-size:clamp(1.9rem,3.6vw,2.8rem);margin:12px 0 10px}
+.contact .side > p{color:var(--muted);font-size:1.06rem;max-width:52ch}
+.after{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px;counter-reset:a}
+.after li{display:flex;gap:12px;align-items:flex-start}
+.after li::before{counter-increment:a;content:counter(a);flex:none;width:32px;height:32px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;font-weight:800;font-size:1rem}
+.after b{display:block;font-weight:700;color:var(--blue-d)}
+.after span{color:var(--muted);font-size:.92rem}
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.q{background:#fff;border:1px solid var(--sky-2);border-radius:14px;padding:16px;margin:0}
+.q p{font-size:.95rem;color:var(--text)}
+.q footer{margin-top:8px;color:var(--muted);font-size:.84rem;display:flex;justify-content:space-between;font-weight:600}
+.stars{color:#F5B301;letter-spacing:2px;font-size:.8rem}
+.contact .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+footer.site{position:relative;z-index:1;background:#fff;border-top:1px solid var(--sky);padding:18px 0 100px;color:var(--muted);font-size:.84rem}
+footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+footer.site a{color:var(--blue)}
+/* footer: "veterans of police and Shin Bet" with the two small emblems, on its own row above the legal line */
+footer.site .vets{flex-basis:100%;display:flex;align-items:center;gap:16px;padding-bottom:14px;margin-bottom:4px;border-bottom:1px solid var(--sky-2)}
+footer.site .vets-cap{font-weight:700;color:var(--blue-d);font-size:.9rem}
+footer.site .vets img{height:48px;width:auto;display:block}
+/* the Shin Bet file carries text above and below its emblem (emblem = 69 of 96px), the police file is all emblem:
+   scale the Shin Bet image so both emblems render at the same 48px height */
+footer.site .vets img.shabak{height:67px}
+footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underline-offset:2px}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(var(--shadow-c),.92);display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.modal .inner{position:relative;width:min(1100px,100%)}
+.modal .box{width:100%;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;position:relative}
+.modal video{width:100%;height:100%;display:block}
+.modal .close{position:absolute;top:-46px;inset-inline-end:0;background:none;border:0;color:#fff;font:inherit;font-size:1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px}
+.modal .inner.lic{width:min(620px,100%)}
+.modal .doc-box{background:#fff;border-radius:10px;padding:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.modal .doc-box img{width:100%;height:auto;max-height:84vh;object-fit:contain;display:block}
+.modal .doc-cap{color:#fff;text-align:center;margin-top:12px;font-size:.95rem;font-weight:600}
+
+/* ---------- sticky mobile bar ---------- */
+.bar{position:fixed;bottom:0;inset-inline:0;z-index:60;display:none;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--sky);transform:translateY(110%);transition:transform .3s ease;box-shadow:0 -10px 30px -20px rgba(var(--shadow-c),.4)}
+.bar.show{transform:none}
+.bar .btn{flex:1;padding:12px 10px;font-size:.95rem;min-height:46px}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
+@media (prefers-reduced-motion:reduce){
+  .hero-video-bg video{display:none}
+  .hero-video-bg{background:center/cover no-repeat url(assets/hero-poster.jpg)}
+  .rv{opacity:1;transform:none;transition:none}
+  .scroll-cue svg{animation:none}
+  .hero .overline .wave-text{animation:none;background-image:none;color:var(--blue-dd);-webkit-text-fill-color:var(--blue-dd)}
+  .hero .lead .hl{animation:none;background-size:100% 100%}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){.stamp{width:136px;height:136px}.stamp b{font-size:1.1rem}}
+@media (max-width:980px){
+  .hero{min-height:0;padding:92px 0 64px}
+  .hero .wrap{grid-template-columns:minmax(0,1fr);gap:0;text-align:center}
+  .hero .wrap>div{min-width:0} /* with minmax(0,…) above: the reel's <video> must not widen the column by its intrinsic 1024px */
+  .hero .spacer,.stamp,.scroll-cue{display:none}
+  .hero .lead,.hero .tagline,.tst{margin-inline:auto}
+  .tst{text-align:start}
+  .hero .ask{border-radius:12px;border-inline-start:0;border-bottom:4px solid var(--cyan)}
+  .counters{justify-content:center}
+  .hero .overline,.badges,.hero-ctas,.whisper{justify-content:center}
+  .hero-video-bg video{object-position:center 30%}
+  .hero-video-bg .hero-video{left:0;right:0;width:100%;object-fit:cover;-webkit-mask-image:none;mask-image:none}
+  .hero-video-bg .hero-video-fill{opacity:.5}
+  .hero-video-bg::after{background:linear-gradient(to bottom,rgba(255,255,255,.9) 0%,rgba(255,255,255,.86) 50%,#fff 100%)}
+  .info,.contact{min-height:0;padding:64px 0}
+  .info .wrap,.contact .wrap{grid-template-columns:minmax(0,1fr);gap:36px}
+  .info .wrap>div,.contact .wrap>div{min-width:0} /* the "four reasons" swipe strip must not widen the column by its content */
+  .cta-box{flex-direction:column;align-items:stretch;text-align:center}
+}
+@media (max-width:720px){
+  .hero .overline{font-size:.92rem;text-align:center}
+  .quotes{grid-template-columns:1fr}
+  /* "four reasons" becomes a swipe slider (scroll-snap), one card at a time with a peek of the next; dots are added by JS */
+  .why{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px 4px;padding:4px 16px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .why::-webkit-scrollbar{display:none}
+  .why li{flex:0 0 min(84%,340px);scroll-snap-align:center}
+  .why li.rv{opacity:1;transform:none}
+  .why li:hover{transform:none;box-shadow:none}
+  .why-dots{display:flex;justify-content:center;gap:7px;margin:0 0 16px}
+  .svc{flex-direction:column;gap:10px}
+  .license{flex-direction:column;text-align:center;padding:16px}
+  .license img{width:170px}
+  .license .zoom{justify-content:center}
+  .hero-ctas .btn{flex:1 1 100%}
+  .bar{display:flex}
+  .card{padding:22px 18px}
+  .counters{gap:10px 18px}
+  .badge{font-size:.8rem;padding:6px 10px}
+  footer.site{padding-bottom:110px}
+  /* phones: the hero keeps a still frame behind the text (the clip was ~90% white-washed there anyway) and the
+     clip itself plays one scroll down in .reel, full frame, with nothing over it (client, 2026-10-08) */
+  .hero-video-bg video{display:none}
+  .hero-video-bg{background:center 30%/cover no-repeat url(assets/hero-poster-mobile.jpg)}
+  /* phones: a calmer hero (client, 2026-10-08) - no trust line, no CTA buttons (the sticky bar carries all three from
+     the first screen), tighter type, badges in two columns */
+  .hero{padding:88px 0 28px}
+  .hero .overline,.hero-ctas{display:none}
+  .hero h1{font-size:clamp(2rem,9vw,2.5rem);margin:0 0 12px}
+  .hero .ask{font-size:1.18rem;padding:10px 14px;margin-bottom:12px}
+  .hero .tagline{font-size:.98rem;line-height:1.55;margin-bottom:0}
+  .hero .lead{font-size:1rem;line-height:1.6}
+  .counters{margin-top:18px;padding-top:14px}
+  .counters b{font-size:2rem}
+  .counters span{font-size:.82rem}
+  .badges{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+  .badge{font-size:.76rem;padding:7px 9px;border-radius:12px;justify-content:center;text-align:center;white-space:normal;line-height:1.3}
+  .badge.lic{padding-inline-start:9px}
+  .whisper{margin-top:12px;font-size:.9rem;text-align:start}
+  .tst{margin-top:14px}
+}
+/* ---------- mobile reel: full-bleed clip between the hero's two paragraphs ---------- */
+.reel{display:none}
+@media (max-width:720px) and (prefers-reduced-motion:no-preference){
+  .reel{display:block;margin:16px -16px 18px;border-radius:0}
+  .reel video{display:block;width:100%;height:auto;aspect-ratio:1024/832;object-fit:cover;background:var(--sky-3)}
+}
+</style>
+
+<style>
+/* legal pages */
+.legal{position:relative;z-index:1;padding:128px 0 64px;background:linear-gradient(180deg,var(--sky-3) 0,#fff 220px)}
+.legal .wrap{max-width:820px}
+.legal h1{font-size:clamp(2rem,4vw,2.8rem);margin-bottom:6px}
+.legal .meta{color:var(--muted);font-size:.9rem;margin:0 0 26px}
+.legal h2{font-size:1.3rem;margin:30px 0 8px;color:var(--blue-d)}
+.legal p,.legal li{line-height:1.75;color:var(--text);margin:0 0 10px}
+.legal ul,.legal ol{padding-inline-start:22px;margin:0 0 12px}
+.legal li{margin-bottom:6px}
+.legal a{color:var(--blue);text-decoration:underline;text-underline-offset:2px}
+.legal .box{background:var(--sky-2);border:1px solid var(--sky);border-radius:var(--radius);padding:16px 18px;margin:18px 0}
+.legal .back{display:inline-flex;align-items:center;gap:8px;margin-top:30px;font-weight:700;text-decoration:none}
+.legal .back svg{width:18px;height:18px}
+@media (max-width:720px){.legal{padding-top:104px}}
+</style>
+
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="נטע שגיא חקירות">
+      <span class="t"><b>נטע שגיא</b><small>חקירות · מודיעין · פוליגרף</small></span>
+    </a>
+    <div class="hdr-cta">
+      <span class="hdr-trust" title="חוקרים וחוקרות יוצאי שב״כ ומשטרה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg><span>יוצאי שב״כ ומשטרה</span></span>
+      <a class="phone" href="tel:0506023000" data-track="call_header">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z"/></svg>
+        <span class="num">050-602-3000</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="legal" id="top">
+  <div class="wrap">
+
+    <h1>הצהרת נגישות</h1>
+    <p class="meta">עודכן לאחרונה: 8 באוקטובר 2026</p>
+
+    <p>נטע שגיא - חקירות, מודיעין ופוליגרף רואה חשיבות רבה במתן שירות שוויוני לכל אדם, לרבות אנשים עם מוגבלות, ופועלת להנגשת האתר כך שכל אדם יוכל לגלוש בו בנוחות ולפנות אלינו בקלות. הצהרה זו מתייחסת לאתר זה.</p>
+
+    <h2>1. תקן הנגישות</h2>
+    <p>האתר הונגש בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע״ג-2013, ולתקן הישראלי ת״י 5568, המבוסס על הנחיות WCAG 2.0 ברמה AA של ארגון W3C. ההנגשה מכוונת לפעולה תקינה בדפדפנים הנפוצים ובטכנולוגיות מסייעות כגון קוראי מסך.</p>
+
+    <h2>2. התאמות הנגישות שבוצעו באתר</h2>
+    <ul>
+      <li>מבנה עמוד סמנטי: כותרות מדורגות, אזורי ניווט ותוכן מסומנים, ותיאור טקסטואלי (alt) לתמונות משמעותיות.</li>
+      <li>ניווט מלא במקלדת, עם סימון מיקוד ברור על קישורים, כפתורים ושדות טופס.</li>
+      <li>ניגודיות צבעים העומדת בדרישות התקן בין הטקסט לרקע.</li>
+      <li>טקסט ניתן להגדלה באמצעות הדפדפן ללא פגיעה בתוכן או בתפקוד.</li>
+      <li>שדות הטופס מלווים בתוויות ברורות ובהודעות שגיאה מובנות.</li>
+      <li>הפחתת תנועה: אנימציות באתר, לרבות וידאו רקע, מושבתות או מצומצמות כשמופעלת בהעדפות המערכת האפשרות "הפחתת תנועה".</li>
+      <li>וידאו הרקע בעמוד הראשי אינו כולל שמע ואינו נושא מידע הכרחי, ולכן אינו דורש כתוביות; תוכן העמוד מוצג במלואו כטקסט.</li>
+      <li>האתר מותאם לצפייה במחשב, בטאבלט ובטלפון נייד.</li>
+    </ul>
+
+    <h2>3. דרכי פנייה חלופיות</h2>
+    <p>אם נתקלתם בקושי להשתמש בטופס שבאתר, אפשר לפנות אלינו בטלפון או בהודעת וואטסאפ בכל שלב, ונשמח לסייע ולתאם את השיחה בדרך הנוחה לכם.</p>
+
+    <h2>4. סייגים</h2>
+    <p>למרות מאמצינו להנגיש את כל עמודי האתר, ייתכן שחלקים מסוימים טרם הונגשו במלואם, או שתכנים של צדדים שלישיים (למשל שירות WhatsApp) אינם בשליטתנו. אנחנו ממשיכים לשפר את נגישות האתר באופן שוטף.</p>
+
+    <h2>5. פנייה בנושא נגישות - רכזת הנגישות</h2>
+    <p>אם מצאתם רכיב שאינו נגיש, או שיש לכם הצעה לשיפור, נשמח לשמוע. אנא ציינו את תיאור הבעיה, הפעולה שניסיתם לבצע, הדפדפן והטכנולוגיה המסייעת שבהם השתמשתם, ונטפל בפנייה בהקדם.</p>
+    <div class="box">
+      <p style="margin:0 0 6px"><strong>רכזת הנגישות:</strong> נטע שגיא</p>
+      <p style="margin:0 0 6px"><strong>טלפון:</strong> <a href="tel:0506023000" dir="ltr">050-602-3000</a></p>
+      <p style="margin:0"><strong>דוא״ל:</strong> <a href="mailto:neta.sagi.pi@gmail.com">neta.sagi.pi@gmail.com</a></p>
+    </div>
+
+    <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>חזרה לעמוד הראשי</a>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="vets">
+      <span class="vets-cap">חוקרים יוצאי משטרה ושב״כ</span>
+      <img src="assets/logo/police.png" alt="משטרת ישראל" width="53" height="48" loading="lazy">
+      <img class="shabak" src="assets/logo/shabak.png" alt="שירות הביטחון הכללי" width="86" height="67" loading="lazy">
+    </div>
+    <div>© <span class="num">2026</span> נטע שגיא · חקירות, מודיעין ופוליגרף · ח.פ. <span class="num">516910031</span> · רישיון משרד המשפטים <span class="num">1221423</span></div>
+    <nav class="legal-links" aria-label="מידע משפטי"><a href="accessibility.html">הצהרת נגישות</a> · <a href="privacy.html">מדיניות פרטיות</a> · <a href="mailto:neta.sagi.pi@gmail.com">neta.sagi.pi@gmail.com</a></nav>
+  </div>
+</footer>
+
+</body>
+</html>

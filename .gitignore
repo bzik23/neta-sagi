@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+
+# QA screenshots and scratch output - regenerated on demand
+_shots/
+*.log
