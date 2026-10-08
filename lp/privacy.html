@@ -138,21 +138,16 @@ p{margin:0}
 .whisper{margin-top:16px;font-size:1rem;color:var(--blue-d);display:flex;gap:9px;align-items:center;line-height:1.4}
 .whisper strong{font-weight:700;color:var(--blue-dd)}
 .whisper svg{width:18px;height:18px;color:var(--blue);flex:none}
-/* hero testimonials slider: one quote at a time, cross-fade, auto-advance (paused on hover/focus) */
-.tst{margin-top:18px;max-width:600px;background:rgba(255,255,255,.78);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px 10px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.tst-track{display:grid}
-.tst-item{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s}
-.tst-item.is-on{opacity:1;visibility:visible}
-.tst-item blockquote{margin:0;font-size:.97rem;line-height:1.55;color:var(--text);font-weight:500}
-.tst-item figcaption{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:.86rem;color:var(--blue-d);font-weight:700}
+/* hero testimonials: all four quotes open in one row across the hero (client, 2026-10-08; the one-at-a-time slider was dropped) */
+.hero .wrap>.tst{grid-column:1/-1}
+.tst{margin-top:0}
+.tst-track{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.tst-item{margin:0;display:flex;flex-direction:column;justify-content:space-between;gap:8px;background:rgba(255,255,255,.82);border:1px solid var(--line);border-radius:14px;padding:14px 16px 12px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.tst-item blockquote{margin:0;font-size:.95rem;line-height:1.55;color:var(--text);font-weight:500}
+.tst-item figcaption{display:flex;align-items:center;gap:10px;font-size:.86rem;color:var(--blue-d);font-weight:700}
 .tst-stars{color:#F2A900;letter-spacing:.08em;font-size:.9rem}
-.tst-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
-.tst-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--blue);display:grid;place-items:center;cursor:pointer;padding:0;transition:background .2s ease,color .2s ease}
-.tst-btn:hover{background:var(--blue);color:#fff}
-.tst-btn svg{width:16px;height:16px}
-.tst-dots{display:flex;gap:7px}
-.tst-dot,.why-dot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--sky);cursor:pointer;transition:background .2s ease,transform .2s ease}
-.tst-dot.is-on,.why-dot.is-on{background:var(--blue);transform:scale(1.25)}
+.why-dot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--sky);cursor:pointer;transition:background .2s ease,transform .2s ease}
+.why-dot.is-on{background:var(--blue);transform:scale(1.25)}
 .why-dots{display:none}
 .watch-btn{display:none;align-items:center;gap:10px;margin-top:16px;background:none;border:0;color:var(--blue-d);font:inherit;font-weight:700;cursor:pointer;padding:0}
 .watch-btn i{width:46px;height:46px;border-radius:50%;background:var(--blue);display:grid;place-items:center;transition:transform .2s ease}
@@ -303,8 +298,9 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .hero .wrap{grid-template-columns:minmax(0,1fr);gap:0;text-align:center}
   .hero .wrap>div{min-width:0} /* with minmax(0,…) above: the reel's <video> must not widen the column by its intrinsic 1024px */
   .hero .spacer,.stamp{display:none}
-  .hero .lead,.hero .tagline,.tst{margin-inline:auto}
-  .tst{text-align:start}
+  .hero .lead,.hero .tagline{margin-inline:auto}
+  .tst{text-align:start;margin-top:18px}
+  .tst-track{grid-template-columns:1fr 1fr}
   .hero .ask{border-radius:12px;border-inline-start:0;border-bottom:4px solid var(--cyan)}
   .counters{justify-content:center}
   .hero .overline,.badges,.hero-ctas,.whisper{justify-content:center}
@@ -361,12 +357,46 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .badge.tap{animation:badge-pop .6s cubic-bezier(.2,.8,.2,1) both}
   .whisper{margin-top:12px;font-size:.9rem;text-align:start}
   /* testimonials: all four open, as a full-bleed strip at the end of the hero (client, 2026-10-08) */
-  .tst{max-width:none;margin:18px -16px 0;padding:16px 16px 4px;border-radius:0;border-width:1px 0;background:rgba(255,255,255,.84)}
+  .tst{margin:18px -16px 0;padding:16px 16px 6px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.84)}
   .tst-track{grid-template-columns:1fr;gap:10px}
-  .tst-item{grid-area:auto;opacity:1;visibility:visible;transition:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-  .tst-nav{display:none}
+  .tst-item{background:#fff;border-radius:12px;padding:12px 14px;backdrop-filter:none;-webkit-backdrop-filter:none}
 }
 @keyframes badge-pop{0%{transform:scale(1)}40%{transform:scale(1.07);border-color:var(--blue);box-shadow:0 0 0 3px var(--sky-2),0 12px 24px -16px rgba(var(--shadow-c),.55)}100%{transform:scale(1.02);border-color:var(--blue);box-shadow:0 0 0 2px var(--sky-2)}}
+/* ---------- accessibility: skip link + self-contained widget (copied to the legal pages by build_legal.py) ---------- */
+.skip{position:absolute;top:-80px;inset-inline-start:12px;z-index:100;background:var(--blue-dd);color:#fff;padding:10px 14px;border-radius:0 0 10px 10px;font-weight:700;text-decoration:none}
+.skip:focus{top:0}
+.a11y{position:fixed;left:16px;bottom:22px;z-index:70}
+.a11y-btn{width:46px;height:46px;border-radius:50%;border:2px solid #fff;background:var(--blue);color:#fff;display:grid;place-items:center;cursor:pointer;padding:0;box-shadow:0 8px 20px -10px rgba(var(--shadow-c),.7);transition:transform .2s ease,background .2s ease}
+.a11y-btn:hover{background:var(--blue-h);transform:translateY(-2px)}
+.a11y-btn:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.a11y-btn svg{width:28px;height:28px}
+.a11y-panel{position:absolute;left:0;bottom:58px;width:min(300px,calc(100vw - 32px));background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 20px 40px -20px rgba(var(--shadow-c),.5);padding:12px;direction:rtl;text-align:start}
+.a11y-panel[hidden]{display:none}
+.a11y-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.a11y-head b{font-size:1.05rem;color:var(--blue-d)}
+.a11y-x{border:0;background:none;font-size:1.5rem;line-height:1;cursor:pointer;color:var(--muted);padding:2px 6px}
+.a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.a11y-grid button{font:inherit;font-size:.86rem;font-weight:600;color:var(--blue-d);background:var(--sky-3);border:1.5px solid var(--sky);border-radius:10px;padding:10px 8px;cursor:pointer;text-align:center;line-height:1.3}
+.a11y-grid button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.a11y-grid button:focus-visible,.a11y-x:focus-visible,.a11y-foot :focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.a11y-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:.84rem}
+.a11y-foot button{font:inherit;font-size:.84rem;font-weight:700;color:var(--blue);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:2px;padding:0}
+.a11y-foot a{color:var(--blue);text-decoration:underline;text-underline-offset:2px}
+@media (max-width:720px){.a11y{left:12px;bottom:calc(90px + env(safe-area-inset-bottom))}.a11y-btn{width:42px;height:42px}.a11y-btn svg{width:25px;height:25px}}
+/* modes = classes on <html>; no filter on html/body (that would break position:fixed) */
+html.a11y-font-1{font-size:112.5%}
+html.a11y-font-2{font-size:125%}
+html.a11y-contrast{--text:#000;--muted:#1d1d1d;--blue:#0A4E73;--blue-h:#083B57;--cta:#0A4E73;--cta-h:#083B57;--blue-d:#143A4E;--blue-dd:#0F2B3A;--line:#555;--sky:#8FB4C8}
+html.a11y-contrast .hero-video-bg::after{background:rgba(255,255,255,.94)}
+html.a11y-gray :is(.top,.hero,.info,.contact,footer.site,.legal){filter:grayscale(1)}
+html.a11y-links a:not(.btn):not(.a11y-foot a){text-decoration:underline!important;text-underline-offset:3px;background:#FFF3B0;color:#0B3D91!important}
+html.a11y-readable body,html.a11y-readable button,html.a11y-readable input{font-family:Arial,Helvetica,"Noto Sans Hebrew",sans-serif}
+html.a11y-readable :is(h1,h2,h3,.brand b,.counters b,.why b,.hero .ask,.svc b){font-stretch:100%}
+html.a11y-spacing body{letter-spacing:.05em;word-spacing:.12em;line-height:1.8}
+html.a11y-motion *,html.a11y-motion *::before,html.a11y-motion *::after{animation:none!important;transition:none!important}
+html.a11y-motion .hero-video-bg video,html.a11y-motion .reel{display:none}
+html.a11y-motion .hero-video-bg{background:center/cover no-repeat url(assets/hero-poster.jpg)}
+html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'><path d='M5 3l14 9-6 1 3 6-3 1-3-6-5 4z' fill='%23fff' stroke='%23000' stroke-width='1.5' stroke-linejoin='round'/></svg>") 5 3,auto!important}
 /* ---------- mobile reel: full-bleed clip between the hero's two paragraphs ---------- */
 .reel{display:none}
 @media (max-width:720px) and (prefers-reduced-motion:no-preference){
@@ -475,6 +505,57 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
     <nav class="legal-links" aria-label="מידע משפטי"><a href="accessibility.html">הצהרת נגישות</a> · <a href="privacy.html">מדיניות פרטיות</a> · <a href="mailto:neta.sagi.pi@gmail.com">neta.sagi.pi@gmail.com</a></nav>
   </div>
 </footer>
+
+<!-- a11y -->
+<div class="a11y" id="a11y">
+  <button class="a11y-btn" id="a11yBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="a11yPanel" aria-label="פתיחת תפריט נגישות" title="נגישות">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M20 9.5a1 1 0 0 0-1.2-.8c-2.3.5-4.6.8-6.8.8s-4.5-.3-6.8-.8a1 1 0 1 0-.4 2c1.7.4 3.4.6 5.2.7v2.4l-2.6 6.4a1 1 0 0 0 1.9.8L12 15.7l2.7 5.3a1 1 0 0 0 1.9-.8L14 13.8v-2.4c1.8-.1 3.5-.3 5.2-.7A1 1 0 0 0 20 9.5z"/></svg>
+  </button>
+  <div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="הגדרות נגישות" hidden>
+    <div class="a11y-head"><b>נגישות</b><button class="a11y-x" id="a11yClose" type="button" aria-label="סגירת תפריט הנגישות">×</button></div>
+    <div class="a11y-grid">
+      <button type="button" data-a11y="font" aria-pressed="false">הגדלת טקסט</button>
+      <button type="button" data-a11y="contrast" aria-pressed="false">ניגודיות גבוהה</button>
+      <button type="button" data-a11y="gray" aria-pressed="false">גווני אפור</button>
+      <button type="button" data-a11y="links" aria-pressed="false">הדגשת קישורים</button>
+      <button type="button" data-a11y="readable" aria-pressed="false">פונט קריא</button>
+      <button type="button" data-a11y="spacing" aria-pressed="false">ריווח טקסט</button>
+      <button type="button" data-a11y="motion" aria-pressed="false">עצירת אנימציות</button>
+      <button type="button" data-a11y="cursor" aria-pressed="false">סמן גדול</button>
+    </div>
+    <div class="a11y-foot"><button type="button" id="a11yReset">איפוס הגדרות</button><a href="accessibility.html">הצהרת נגישות</a></div>
+  </div>
+</div>
+<script>
+(function(){
+  var html = document.documentElement, KEY = 'ns-a11y', btn = document.getElementById('a11yBtn'), panel = document.getElementById('a11yPanel'), close = document.getElementById('a11yClose');
+  var modes = ['contrast','gray','links','readable','spacing','motion','cursor'], state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+  function apply(){
+    html.classList.remove('a11y-font-1','a11y-font-2'); if (state.font) html.classList.add('a11y-font-' + state.font);
+    modes.forEach(function(m){ html.classList.toggle('a11y-' + m, !!state[m]); });
+    panel.querySelectorAll('[data-a11y]').forEach(function(b){
+      var k = b.dataset.a11y, on = k === 'font' ? !!state.font : !!state[k];
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (k === 'font') b.textContent = state.font === 1 ? 'הגדלת טקסט (+)' : state.font === 2 ? 'הגדלת טקסט (++)' : 'הגדלת טקסט';
+    });
+    if (state.motion) document.querySelectorAll('video').forEach(function(v){ try{ v.pause(); }catch(e){} });
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+  }
+  function open(){ panel.hidden = false; btn.setAttribute('aria-expanded', 'true'); panel.querySelector('[data-a11y]').focus(); }
+  function shut(){ panel.hidden = true; btn.setAttribute('aria-expanded', 'false'); btn.focus(); }
+  btn.addEventListener('click', function(){ if (panel.hidden) open(); else shut(); });
+  close.addEventListener('click', shut);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hidden) shut(); });
+  document.addEventListener('click', function(e){ if (!panel.hidden && !e.target.closest('#a11y')){ panel.hidden = true; btn.setAttribute('aria-expanded', 'false'); } });
+  panel.querySelectorAll('[data-a11y]').forEach(function(b){
+    b.addEventListener('click', function(){ var k = b.dataset.a11y; if (k === 'font') state.font = ((state.font || 0) + 1) % 3; else state[k] = !state[k]; apply(); });
+  });
+  document.getElementById('a11yReset').addEventListener('click', function(){ state = {}; apply(); });
+  apply();
+})();
+</script>
+<!-- /a11y -->
 
 </body>
 </html>

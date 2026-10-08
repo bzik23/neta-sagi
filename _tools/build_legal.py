@@ -16,6 +16,8 @@ style = re.search(r"<style>.*?</style>", src, re.S).group(0)
 head_links = re.search(r'<link rel="icon".*?(?=<style>)', src, re.S).group(0).strip()
 header = re.search(r"<header class=\"top\">.*?</header>", src, re.S).group(0)
 footer = re.search(r"<footer class=\"site\">.*?</footer>", src, re.S).group(0)
+# the self-contained accessibility widget (markup + its own script) rides along with the footer
+a11y = re.search(r"<!-- a11y -->.*?<!-- /a11y -->", src, re.S).group(0)
 # the legal pages live beside index.html, so relative asset paths stay valid; brand links go home
 header = header.replace('href="#top"', 'href="index.html"')
 
@@ -66,6 +68,8 @@ def page(title, desc, body, slug):
 </main>
 
 {footer}
+
+{a11y}
 
 </body>
 </html>
@@ -143,6 +147,8 @@ ACCESS = """
       <li>הפחתת תנועה: אנימציות באתר, לרבות וידאו רקע, מושבתות או מצומצמות כשמופעלת בהעדפות המערכת האפשרות "הפחתת תנועה".</li>
       <li>וידאו הרקע בעמוד הראשי אינו כולל שמע ואינו נושא מידע הכרחי, ולכן אינו דורש כתוביות; תוכן העמוד מוצג במלואו כטקסט.</li>
       <li>האתר מותאם לצפייה במחשב, בטאבלט ובטלפון נייד.</li>
+      <li>קישור "דלגו לתוכן" בראש העמוד למשתמשי מקלדת וקורא מסך.</li>
+      <li><strong>תפריט נגישות</strong> (הכפתור העגול בצד שמאל של המסך) המאפשר: הגדלת טקסט בשתי דרגות, ניגודיות גבוהה, גווני אפור, הדגשת קישורים, פונט קריא, ריווח טקסט, עצירת אנימציות ווידאו, וסמן עכבר גדול. ההגדרות נשמרות בדפדפן לביקורים הבאים וניתנות לאיפוס בלחיצה אחת. התפריט נפתח ונסגר גם במקלדת (Esc לסגירה).</li>
     </ul>
 
     <h2>3. דרכי פנייה חלופיות</h2>
