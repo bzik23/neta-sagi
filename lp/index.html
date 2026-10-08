@@ -10,6 +10,16 @@
 <meta property="og:title" content="נטע שגיא | משרד חקירות, דיבוב ומעקבים">
 <meta property="og:description" content="מרגישים שמישהו מסתיר מכם משהו? יוצאי שב״כ ומשטרה, 30 שנות ניסיון, חשאיות מוחלטת.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://bzik23.github.io/neta-sagi/">
+<!-- share card (WhatsApp): JPEG under 300KB, explicit size, absolute https URL -->
+<meta property="og:image" content="https://bzik23.github.io/neta-sagi/assets/og-card.jpg">
+<meta property="og:image:secure_url" content="https://bzik23.github.io/neta-sagi/assets/og-card.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="נטע שגיא - חקירות, מודיעין, פוליגרף">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://bzik23.github.io/neta-sagi/assets/og-card.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&display=swap" rel="stylesheet">
@@ -686,11 +696,12 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   function fmt(n){ return n.toLocaleString('en-US'); }
   function runCounters(){
     document.querySelectorAll('[data-count]').forEach(function(el, i){
-      var target = +el.dataset.count, suf = el.dataset.suffix||'', dur = 3200 + i*300, t0 = null;
+      /* slowed 2026-10-08 (client: "too fast"): ~4.8-5.6s with a gentler ease-out instead of 3.2-3.8s cubic */
+      var target = +el.dataset.count, suf = el.dataset.suffix||'', dur = 4800 + i*400, t0 = null;
       if (reduce){ el.textContent = fmt(target) + suf; return; }
       function step(ts){
         if (!t0) t0 = ts;
-        var p = Math.min(1, (ts - t0)/dur); p = 1 - Math.pow(1-p, 3);
+        var p = Math.min(1, (ts - t0)/dur); p = 1 - Math.pow(1-p, 2);
         el.textContent = fmt(Math.round(target*p)) + suf;
         if (p < 1) requestAnimationFrame(step);
       }
