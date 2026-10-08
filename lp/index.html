@@ -285,6 +285,7 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .scroll-cue svg{animation:none}
   .hero .overline .wave-text{animation:none;background-image:none;color:var(--blue-dd);-webkit-text-fill-color:var(--blue-dd)}
   .hero .lead .hl{animation:none;background-size:100% 100%}
+  .badge.tap{animation:none;border-color:var(--blue)}
   html{scroll-behavior:auto}
 }
 
@@ -347,10 +348,14 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .counters span{font-size:.82rem}
   .badges{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
   .badge{font-size:.76rem;padding:7px 9px;border-radius:12px;justify-content:center;text-align:center;white-space:normal;line-height:1.3}
-  .badge.lic{padding-inline-start:9px}
+  .badge.lic{padding-inline-start:9px;cursor:default}
+  /* trust badges are not links on phones: a tap just pops them a little (client, 2026-10-08) */
+  .badge{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+  .badge.tap{animation:badge-pop .6s cubic-bezier(.2,.8,.2,1) both}
   .whisper{margin-top:12px;font-size:.9rem;text-align:start}
   .tst{margin-top:14px}
 }
+@keyframes badge-pop{0%{transform:scale(1)}40%{transform:scale(1.07);border-color:var(--blue);box-shadow:0 0 0 3px var(--sky-2),0 12px 24px -16px rgba(var(--shadow-c),.55)}100%{transform:scale(1.02);border-color:var(--blue);box-shadow:0 0 0 2px var(--sky-2)}}
 /* ---------- mobile reel: full-bleed clip between the hero's two paragraphs ---------- */
 .reel{display:none}
 @media (max-width:720px) and (prefers-reduced-motion:no-preference){
@@ -495,7 +500,8 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
       <span class="tab">פנייה חסויה</span>
       <h2>שיחת ייעוץ ראשונית, ללא תשלום וללא התחייבות</h2>
       <p class="sub">מספרים לנו בכמה מילים, ואנחנו חוזרים אליכם לשיחה שקטה.</p>
-      <form id="leadForm" novalidate data-endpoint="">
+      <!-- FormSubmit (static page, no PHP yet): the id is the activated alias of the agency inbox; the client is CC'd from the JS payload -->
+      <form id="leadForm" novalidate data-endpoint="https://formsubmit.co/ajax/e4fb122e133e6477b7010e78b7957c8e">
         <div class="field">
           <label for="name">שם (אפשר שם פרטי בלבד)</label>
           <input id="name" name="name" type="text" autocomplete="given-name" placeholder="איך לפנות אליכם?">
@@ -628,15 +634,34 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
     start();
   })();
 
-  /* ---- "four reasons": swipe slider with dots on phones (CSS scroll-snap does the sliding) ---- */
+  /* ---- trust badges on phones: not links any more, a tap just pops them a little (client, 2026-10-08) ---- */
+  if (mobile){
+    document.querySelectorAll('.badges .badge').forEach(function(b){
+      if (b.classList.contains('lic')){ b.removeAttribute('href'); b.removeAttribute('target'); b.removeAttribute('rel'); b.removeAttribute('title'); b.classList.remove('lic-open'); }
+      var t = null;
+      b.addEventListener('click', function(ev){
+        ev.preventDefault();
+        b.classList.remove('tap'); void b.offsetWidth; b.classList.add('tap');
+        clearTimeout(t); t = setTimeout(function(){ b.classList.remove('tap'); }, 1400);
+      });
+    });
+  }
+
+  /* ---- "four reasons": swipe slider with dots on phones (CSS scroll-snap does the sliding), auto-advancing every 1.5s ---- */
   (function(){
     var ul = document.querySelector('.why'); if (!ul || !mobile) return;
-    var items = [].slice.call(ul.children), box = document.createElement('div'), dots, raf = null;
+    var items = [].slice.call(ul.children), box = document.createElement('div'), dots, raf = null, cur = 0, timer = null, touching = false, seen = true;
     box.className = 'why-dots'; box.setAttribute('role', 'tablist'); box.setAttribute('aria-label', 'ארבע סיבות');
+    function goTo(i){
+      var li = items[(i + items.length) % items.length], r = ul.getBoundingClientRect(), b = li.getBoundingClientRect();
+      ul.scrollBy({left:(b.left + b.width / 2) - (r.left + r.width / 2), top:0, behavior:'smooth'}); /* horizontal only: never moves the page */
+    }
+    function start(){ if (reduce || timer || touching || !seen) return; timer = setInterval(function(){ goTo(cur + 1); }, 1500); }
+    function stop(){ clearInterval(timer); timer = null; }
     dots = items.map(function(li, i){
       var d = document.createElement('button'); d.type = 'button'; d.className = 'why-dot' + (i ? '' : ' is-on');
       d.setAttribute('role', 'tab'); d.setAttribute('aria-label', 'סיבה ' + (i + 1));
-      d.addEventListener('click', function(){ li.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'}); });
+      d.addEventListener('click', function(){ stop(); goTo(i); start(); });
       box.appendChild(d); return d;
     });
     ul.parentNode.insertBefore(box, ul.nextSibling);
@@ -644,9 +669,17 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
       raf = null;
       var r = ul.getBoundingClientRect(), c = r.left + r.width / 2, best = 0, bd = Infinity;
       items.forEach(function(li, i){ var b = li.getBoundingClientRect(), d = Math.abs(b.left + b.width / 2 - c); if (d < bd){ bd = d; best = i; } });
+      cur = best;
       dots.forEach(function(d, i){ d.classList.toggle('is-on', i === best); d.setAttribute('aria-selected', i === best ? 'true' : 'false'); });
     }
     ul.addEventListener('scroll', function(){ if (!raf) raf = requestAnimationFrame(mark); }, {passive:true});
+    /* a finger on the strip pauses it; it resumes a moment after the finger lifts */
+    ul.addEventListener('touchstart', function(){ touching = true; stop(); }, {passive:true});
+    ul.addEventListener('touchend', function(){ touching = false; setTimeout(start, 2500); }, {passive:true});
+    ul.addEventListener('touchcancel', function(){ touching = false; setTimeout(start, 2500); }, {passive:true});
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ es.forEach(function(e){ seen = e.isIntersecting; if (seen) start(); else stop(); }); }, {threshold:.4}).observe(ul);
+    } else { start(); }
   })();
 
   /* ---- hero counters: run on load ---- */
@@ -727,11 +760,17 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
     if (!okName || !okPhone || !okEmail || !okConsent){ (!okName ? name : (!okPhone ? phone : (!okEmail ? email : consent))).focus(); return; }
     if (form.website.value) return; /* honeypot */
     var btn = form.querySelector('button[type=submit]'); btn.disabled = true; btn.textContent = 'שולח...';
-    var payload = {name:name.value.trim(), phone:digits, email:mail, page:location.href};
+    var payload = {
+      name:name.value.trim(), phone:digits, email:mail, page:location.href,
+      /* FormSubmit options: subject line, table layout, no captcha page; "email" above doubles as reply-to */
+      _subject:'ליד חדש מעמוד הנחיתה - נטע שגיא', _template:'table', _captcha:'false',
+      _cc:'neta.sagi.pi' + '@' + 'gmail.com' /* the client's inbox; assembled so address harvesters skip it */
+    };
     var ep = form.dataset.endpoint;
     var finish = function(){ box.classList.add('sent'); track('generate_lead'); box.scrollIntoView({behavior:'smooth', block:'center'}); };
     if (ep){
-      fetch(ep, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)})
+      fetch(ep, {method:'POST', headers:{'Content-Type':'application/json', 'Accept':'application/json'}, body:JSON.stringify(payload)})
+        .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || ('HTTP ' + r.status)); }); })
         .then(finish).catch(function(){ btn.disabled=false; btn.textContent='שלחו עכשיו'; alert('משהו השתבש. אפשר להתקשר אלינו ישירות: 050-602-3000'); });
     } else { setTimeout(finish, 500); }
   });

@@ -285,6 +285,7 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .scroll-cue svg{animation:none}
   .hero .overline .wave-text{animation:none;background-image:none;color:var(--blue-dd);-webkit-text-fill-color:var(--blue-dd)}
   .hero .lead .hl{animation:none;background-size:100% 100%}
+  .badge.tap{animation:none;border-color:var(--blue)}
   html{scroll-behavior:auto}
 }
 
@@ -347,10 +348,14 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .counters span{font-size:.82rem}
   .badges{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
   .badge{font-size:.76rem;padding:7px 9px;border-radius:12px;justify-content:center;text-align:center;white-space:normal;line-height:1.3}
-  .badge.lic{padding-inline-start:9px}
+  .badge.lic{padding-inline-start:9px;cursor:default}
+  /* trust badges are not links on phones: a tap just pops them a little (client, 2026-10-08) */
+  .badge{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+  .badge.tap{animation:badge-pop .6s cubic-bezier(.2,.8,.2,1) both}
   .whisper{margin-top:12px;font-size:.9rem;text-align:start}
   .tst{margin-top:14px}
 }
+@keyframes badge-pop{0%{transform:scale(1)}40%{transform:scale(1.07);border-color:var(--blue);box-shadow:0 0 0 3px var(--sky-2),0 12px 24px -16px rgba(var(--shadow-c),.55)}100%{transform:scale(1.02);border-color:var(--blue);box-shadow:0 0 0 2px var(--sky-2)}}
 /* ---------- mobile reel: full-bleed clip between the hero's two paragraphs ---------- */
 .reel{display:none}
 @media (max-width:720px) and (prefers-reduced-motion:no-preference){
