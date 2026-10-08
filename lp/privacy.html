@@ -12,14 +12,14 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bzik23.github.io/neta-sagi/">
 <!-- share card (WhatsApp): JPEG under 300KB, explicit size, absolute https URL -->
-<meta property="og:image" content="https://bzik23.github.io/neta-sagi/assets/og-card.jpg">
-<meta property="og:image:secure_url" content="https://bzik23.github.io/neta-sagi/assets/og-card.jpg">
+<meta property="og:image" content="https://bzik23.github.io/neta-sagi/assets/og-card2.jpg">
+<meta property="og:image:secure_url" content="https://bzik23.github.io/neta-sagi/assets/og-card2.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="נטע שגיא - חקירות, מודיעין, פוליגרף">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://bzik23.github.io/neta-sagi/assets/og-card.jpg">
+<meta name="twitter:image" content="https://bzik23.github.io/neta-sagi/assets/og-card2.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&display=swap" rel="stylesheet">
@@ -165,8 +165,6 @@ p{margin:0}
 .stamp i{font-style:italic;font-weight:600;font-size:.98rem;display:block;margin-bottom:4px}
 .stamp small{display:flex;align-items:center;gap:5px;font-size:.78rem;margin-top:8px;font-weight:600;opacity:.95}
 .stamp small svg{width:13px;height:13px}
-.scroll-cue{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:2;color:var(--blue);font-size:.78rem;font-weight:700;letter-spacing:.1em;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none}
-.scroll-cue svg{width:18px;height:18px;animation:bob 1.8s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 
 /* ---------- screen 2: info ---------- */
@@ -292,7 +290,6 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .hero-video-bg video{display:none}
   .hero-video-bg{background:center/cover no-repeat url(assets/hero-poster.jpg)}
   .rv{opacity:1;transform:none;transition:none}
-  .scroll-cue svg{animation:none}
   .hero .overline .wave-text{animation:none;background-image:none;color:var(--blue-dd);-webkit-text-fill-color:var(--blue-dd)}
   .hero .lead .hl{animation:none;background-size:100% 100%}
   .badge.tap{animation:none;border-color:var(--blue)}
@@ -305,7 +302,7 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .hero{min-height:0;padding:92px 0 64px}
   .hero .wrap{grid-template-columns:minmax(0,1fr);gap:0;text-align:center}
   .hero .wrap>div{min-width:0} /* with minmax(0,…) above: the reel's <video> must not widen the column by its intrinsic 1024px */
-  .hero .spacer,.stamp,.scroll-cue{display:none}
+  .hero .spacer,.stamp{display:none}
   .hero .lead,.hero .tagline,.tst{margin-inline:auto}
   .tst{text-align:start}
   .hero .ask{border-radius:12px;border-inline-start:0;border-bottom:4px solid var(--cyan)}
@@ -363,7 +360,11 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .badge{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
   .badge.tap{animation:badge-pop .6s cubic-bezier(.2,.8,.2,1) both}
   .whisper{margin-top:12px;font-size:.9rem;text-align:start}
-  .tst{margin-top:14px}
+  /* testimonials: all four open, as a full-bleed strip at the end of the hero (client, 2026-10-08) */
+  .tst{max-width:none;margin:18px -16px 0;padding:16px 16px 4px;border-radius:0;border-width:1px 0;background:rgba(255,255,255,.84)}
+  .tst-track{grid-template-columns:1fr;gap:10px}
+  .tst-item{grid-area:auto;opacity:1;visibility:visible;transition:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .tst-nav{display:none}
 }
 @keyframes badge-pop{0%{transform:scale(1)}40%{transform:scale(1.07);border-color:var(--blue);box-shadow:0 0 0 3px var(--sky-2),0 12px 24px -16px rgba(var(--shadow-c),.55)}100%{transform:scale(1.02);border-color:var(--blue);box-shadow:0 0 0 2px var(--sky-2)}}
 /* ---------- mobile reel: full-bleed clip between the hero's two paragraphs ---------- */
