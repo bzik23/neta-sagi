@@ -146,9 +146,11 @@ p{margin:0}
 .tst-item blockquote{margin:0;font-size:.95rem;line-height:1.55;color:var(--text);font-weight:500}
 .tst-item figcaption{display:flex;align-items:center;gap:10px;font-size:.86rem;color:var(--blue-d);font-weight:700}
 .tst-stars{color:#F2A900;letter-spacing:.08em;font-size:.9rem}
-.why-dot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--sky);cursor:pointer;transition:background .2s ease,transform .2s ease}
-.why-dot.is-on{background:var(--blue);transform:scale(1.25)}
-.why-dots{display:none}
+/* slider dots (phones): shared by the "four reasons" strip and the testimonials; created by JS */
+.sl-dot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--sky);cursor:pointer;transition:background .2s ease,transform .2s ease}
+.sl-dot.is-on{background:var(--blue);transform:scale(1.25)}
+.sl-dots{display:none}
+.tst-title{display:none}
 .watch-btn{display:none;align-items:center;gap:10px;margin-top:16px;background:none;border:0;color:var(--blue-d);font:inherit;font-weight:700;cursor:pointer;padding:0}
 .watch-btn i{width:46px;height:46px;border-radius:50%;background:var(--blue);display:grid;place-items:center;transition:transform .2s ease}
 .watch-btn i svg{width:18px;height:18px;color:#fff;margin-inline-start:3px}
@@ -322,7 +324,7 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .why li{flex:0 0 min(84%,340px);scroll-snap-align:center}
   .why li.rv{opacity:1;transform:none}
   .why li:hover{transform:none;box-shadow:none}
-  .why-dots{display:flex;justify-content:center;gap:7px;margin:0 0 16px}
+  .sl-dots{display:flex;justify-content:center;gap:7px;margin:0 0 16px}
   .svc{flex-direction:column;gap:10px}
   .license{flex-direction:column;text-align:center;padding:16px}
   .license img{width:170px}
@@ -340,7 +342,8 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   /* phones: a calmer hero (client, 2026-10-08) - no trust line, no CTA buttons (the sticky bar carries all three from
      the first screen), tighter type, badges in two columns */
   .top{display:none} /* phones: no header at all (client, 2026-10-08) - the sticky bar carries the call button */
-  .hero{padding:28px 0 28px}
+  .hero{padding:28px 0 0} /* the testimonials strip closes the hero; a tighter gap to "what we do" (client, 2026-10-11) */
+  .info{padding-top:44px}
   .hero-ctas{display:none}
   /* phones: the headline comes first and the trust line (with its light wave) sits right under it (client, 2026-10-11).
      The text column becomes a flex column so the h1 can be ordered before the overline without duplicating markup */
@@ -355,9 +358,10 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .hero .ask span{display:block}
   .hero .tagline{font-size:.98rem;line-height:1.55;margin-bottom:0}
   .hero .lead{font-size:1rem;line-height:1.6}
-  .counters{margin-top:18px;padding-top:14px}
-  .counters b{font-size:2rem}
-  .counters span{font-size:.82rem}
+  /* phones: bigger, more prominent counters in three equal columns; they run only when scrolled into view (client, 2026-10-11) */
+  .counters{margin-top:20px;padding-top:18px;grid-template-columns:repeat(3,1fr);gap:8px 6px;text-align:center}
+  .counters b{font-size:2.75rem;text-align:center}
+  .counters span{font-size:.86rem;margin-top:6px}
   .badges{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
   .badge{font-size:.76rem;padding:7px 9px;border-radius:12px;justify-content:center;text-align:center;white-space:normal;line-height:1.3}
   .badge.lic{padding-inline-start:9px;cursor:default}
@@ -365,10 +369,15 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .badge{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
   .badge.tap{animation:badge-pop .6s cubic-bezier(.2,.8,.2,1) both}
   .whisper{margin-top:12px;font-size:.9rem;text-align:start}
-  /* testimonials: all four open, as a full-bleed strip at the end of the hero (client, 2026-10-08) */
-  .tst{margin:18px -16px 0;padding:16px 16px 6px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.84)}
-  .tst-track{grid-template-columns:1fr;gap:10px}
-  .tst-item{background:#fff;border-radius:12px;padding:12px 14px;backdrop-filter:none;-webkit-backdrop-filter:none}
+  /* testimonials (phones): a titled slider, one quote per slide, auto-advancing every 1.5s with dots (client, 2026-10-11);
+     a full-bleed strip at the end of the hero */
+  .tst{margin:18px -16px 0;padding:18px 16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.84)}
+  .tst-title{display:block;font-size:1.4rem;text-align:center;color:var(--blue-d);margin:0 0 12px}
+  .tst-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:2px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .tst-track::-webkit-scrollbar{display:none}
+  .tst-item{flex:0 0 100%;scroll-snap-align:center;background:#fff;border-radius:12px;padding:14px 16px;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .tst-item blockquote{font-size:1rem}
+  .tst .sl-dots{margin:0 0 14px}
 }
 @keyframes badge-pop{0%{transform:scale(1)}40%{transform:scale(1.07);border-color:var(--blue);box-shadow:0 0 0 3px var(--sky-2),0 12px 24px -16px rgba(var(--shadow-c),.55)}100%{transform:scale(1.02);border-color:var(--blue);box-shadow:0 0 0 2px var(--sky-2)}}
 /* ---------- accessibility: skip link + self-contained widget (copied to the legal pages by build_legal.py) ---------- */
@@ -487,7 +496,8 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
     <div class="spacer" aria-hidden="true"></div>
     <!-- all four quotes open, one row across the hero (grid-column 1/-1); on phones a full-bleed stack -->
     <div class="tst" id="tst" aria-label="לקוחות מספרים">
-        <div class="tst-track">
+        <h2 class="tst-title">מה הלקוחות שלנו מספרים</h2>
+        <div class="tst-track" data-sl="המלצות" data-sl-item="המלצה">
           <figure class="tst-item"><blockquote>"נטע וכל הצוות היקר, מבקשים להודות לכם על שיתוף פעולה פורה, ועל מקצועיות בלתי מתפשרת! חסכתם למשפחה המון כסף ועוגמת נפש גדולה".</blockquote><figcaption><span class="tst-name">דנה, שם בדוי</span><span class="tst-stars" aria-label="חמישה כוכבים">★★★★★</span></figcaption></figure>
           <figure class="tst-item"><blockquote>"זו התמונה שהייתי צריכה הפעם. לא מאמינה שהשגת אותה כל כך מהר. אין לי מילים, תודה אתם מקצוענים!"</blockquote><figcaption><span class="tst-name">שני, שם בדוי</span><span class="tst-stars" aria-label="חמישה כוכבים">★★★★★</span></figcaption></figure>
           <figure class="tst-item"><blockquote>"לנטע, שגיא וכל הצוות, הערכתנו הרבה על הדיסקרטיות, המקצועיות והתוצאות המדהימות שהבאתם!"</blockquote><figcaption><span class="tst-name">יאיר, שם בדוי</span><span class="tst-stars" aria-label="חמישה כוכבים">★★★★★</span></figcaption></figure>
@@ -527,7 +537,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
         <span class="overline">למה נטע שגיא</span>
         <h2>ארבע סיבות לבחור בנו</h2>
       </div>
-      <ul class="why">
+      <ul class="why" data-sl="ארבע סיבות" data-sl-item="סיבה">
         <li class="rv"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/></svg></span><b>חשאיות מוחלטת</b><span>אף אחד לא יידע שפניתם. כל פרט נשמר בסודיות, גם אחרי סיום החקירה. חוזרים ממספר רגיל ולא מזדהים כמשרד חקירות.</span></li>
         <li class="rv d1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><circle cx="17" cy="9" r="3"/><path d="M2 21a7 7 0 0 1 14 0M15 21a5 5 0 0 1 7-4.6"/></svg></span><b>יוצאי שב״כ ומשטרה</b><span>חוקרים וחוקרות שהגיעו מהמקומות שבהם אין מקום לטעויות. חוקרת פרטית מגיעה למקומות ולשיחות שחוקר לא יכול.</span></li>
         <li class="rv d2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>30 שנות ניסיון</b><span>למעלה מ-4,300 חקירות מורכבות, 97% הצלחה, בארץ ובחו״ל. עדכונים בזמן אמת, לא רק בסוף.</span></li>
@@ -726,40 +736,43 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
     });
   }
 
-  /* ---- "four reasons": swipe slider with dots on phones (CSS scroll-snap does the sliding), auto-advancing every 1.5s ---- */
-  (function(){
-    var ul = document.querySelector('.why'); if (!ul || !mobile) return;
-    var items = [].slice.call(ul.children), box = document.createElement('div'), dots, raf = null, cur = 0, timer = null, touching = false, seen = true;
-    box.className = 'why-dots'; box.setAttribute('role', 'tablist'); box.setAttribute('aria-label', 'ארבע סיבות');
+  /* ---- phone sliders: "four reasons" and the hero testimonials (CSS scroll-snap does the sliding), dots, auto-advance every 1.5s ---- */
+  function makeSlider(track, interval){
+    if (!track || !mobile) return;
+    var items = [].slice.call(track.children), box = document.createElement('div'), dots, raf = null, cur = 0, timer = null, touching = false, seen = true;
+    var label = track.getAttribute('data-sl') || 'שקופיות', itemLabel = track.getAttribute('data-sl-item') || 'שקופית';
+    box.className = 'sl-dots'; box.setAttribute('role', 'tablist'); box.setAttribute('aria-label', label);
     function goTo(i){
-      var li = items[(i + items.length) % items.length], r = ul.getBoundingClientRect(), b = li.getBoundingClientRect();
-      ul.scrollBy({left:(b.left + b.width / 2) - (r.left + r.width / 2), top:0, behavior:'smooth'}); /* horizontal only: never moves the page */
+      var li = items[(i + items.length) % items.length], r = track.getBoundingClientRect(), b = li.getBoundingClientRect();
+      track.scrollBy({left:(b.left + b.width / 2) - (r.left + r.width / 2), top:0, behavior:'smooth'}); /* horizontal only: never moves the page */
     }
-    function start(){ if (reduce || timer || touching || !seen || document.documentElement.classList.contains('a11y-motion')) return; timer = setInterval(function(){ goTo(cur + 1); }, 1500); }
+    function start(){ if (reduce || timer || touching || !seen || document.documentElement.classList.contains('a11y-motion')) return; timer = setInterval(function(){ goTo(cur + 1); }, interval); }
     function stop(){ clearInterval(timer); timer = null; }
     dots = items.map(function(li, i){
-      var d = document.createElement('button'); d.type = 'button'; d.className = 'why-dot' + (i ? '' : ' is-on');
-      d.setAttribute('role', 'tab'); d.setAttribute('aria-label', 'סיבה ' + (i + 1));
+      var d = document.createElement('button'); d.type = 'button'; d.className = 'sl-dot' + (i ? '' : ' is-on');
+      d.setAttribute('role', 'tab'); d.setAttribute('aria-label', itemLabel + ' ' + (i + 1));
       d.addEventListener('click', function(){ stop(); goTo(i); start(); });
       box.appendChild(d); return d;
     });
-    ul.parentNode.insertBefore(box, ul.nextSibling);
+    track.parentNode.insertBefore(box, track.nextSibling);
     function mark(){
       raf = null;
-      var r = ul.getBoundingClientRect(), c = r.left + r.width / 2, best = 0, bd = Infinity;
+      var r = track.getBoundingClientRect(), c = r.left + r.width / 2, best = 0, bd = Infinity;
       items.forEach(function(li, i){ var b = li.getBoundingClientRect(), d = Math.abs(b.left + b.width / 2 - c); if (d < bd){ bd = d; best = i; } });
       cur = best;
       dots.forEach(function(d, i){ d.classList.toggle('is-on', i === best); d.setAttribute('aria-selected', i === best ? 'true' : 'false'); });
     }
-    ul.addEventListener('scroll', function(){ if (!raf) raf = requestAnimationFrame(mark); }, {passive:true});
+    track.addEventListener('scroll', function(){ if (!raf) raf = requestAnimationFrame(mark); }, {passive:true});
     /* a finger on the strip pauses it; it resumes a moment after the finger lifts */
-    ul.addEventListener('touchstart', function(){ touching = true; stop(); }, {passive:true});
-    ul.addEventListener('touchend', function(){ touching = false; setTimeout(start, 2500); }, {passive:true});
-    ul.addEventListener('touchcancel', function(){ touching = false; setTimeout(start, 2500); }, {passive:true});
+    track.addEventListener('touchstart', function(){ touching = true; stop(); }, {passive:true});
+    track.addEventListener('touchend', function(){ touching = false; setTimeout(start, 2500); }, {passive:true});
+    track.addEventListener('touchcancel', function(){ touching = false; setTimeout(start, 2500); }, {passive:true});
     if ('IntersectionObserver' in window){
-      new IntersectionObserver(function(es){ es.forEach(function(e){ seen = e.isIntersecting; if (seen) start(); else stop(); }); }, {threshold:.4}).observe(ul);
+      new IntersectionObserver(function(es){ es.forEach(function(e){ seen = e.isIntersecting; if (seen) start(); else stop(); }); }, {threshold:.4}).observe(track);
     } else { start(); }
-  })();
+  }
+  makeSlider(document.querySelector('.why'), 1500);
+  makeSlider(document.querySelector('.tst-track'), 1500);
 
   /* ---- hero counters: run on load ---- */
   function fmt(n){ return n.toLocaleString('en-US'); }
@@ -777,7 +790,14 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
       requestAnimationFrame(step);
     });
   }
-  window.addEventListener('load', function(){ setTimeout(runCounters, 350); });
+  /* phones: the counters sit below the first screen, so they run once, when the block scrolls into view (client, 2026-10-11) */
+  var countersBox = document.querySelector('.counters');
+  if (mobile && countersBox && 'IntersectionObserver' in window){
+    var cio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ cio.disconnect(); runCounters(); } }); }, {threshold:.6});
+    cio.observe(countersBox);
+  } else {
+    window.addEventListener('load', function(){ setTimeout(runCounters, 350); });
+  }
 
   /* ---- story video: show the hero button only if the file exists ---- */
   var story = document.getElementById('story'), modal = document.getElementById('modal'), watchBtn = document.getElementById('watchBtn');

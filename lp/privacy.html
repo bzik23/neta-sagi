@@ -146,9 +146,11 @@ p{margin:0}
 .tst-item blockquote{margin:0;font-size:.95rem;line-height:1.55;color:var(--text);font-weight:500}
 .tst-item figcaption{display:flex;align-items:center;gap:10px;font-size:.86rem;color:var(--blue-d);font-weight:700}
 .tst-stars{color:#F2A900;letter-spacing:.08em;font-size:.9rem}
-.why-dot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--sky);cursor:pointer;transition:background .2s ease,transform .2s ease}
-.why-dot.is-on{background:var(--blue);transform:scale(1.25)}
-.why-dots{display:none}
+/* slider dots (phones): shared by the "four reasons" strip and the testimonials; created by JS */
+.sl-dot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--sky);cursor:pointer;transition:background .2s ease,transform .2s ease}
+.sl-dot.is-on{background:var(--blue);transform:scale(1.25)}
+.sl-dots{display:none}
+.tst-title{display:none}
 .watch-btn{display:none;align-items:center;gap:10px;margin-top:16px;background:none;border:0;color:var(--blue-d);font:inherit;font-weight:700;cursor:pointer;padding:0}
 .watch-btn i{width:46px;height:46px;border-radius:50%;background:var(--blue);display:grid;place-items:center;transition:transform .2s ease}
 .watch-btn i svg{width:18px;height:18px;color:#fff;margin-inline-start:3px}
@@ -322,7 +324,7 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .why li{flex:0 0 min(84%,340px);scroll-snap-align:center}
   .why li.rv{opacity:1;transform:none}
   .why li:hover{transform:none;box-shadow:none}
-  .why-dots{display:flex;justify-content:center;gap:7px;margin:0 0 16px}
+  .sl-dots{display:flex;justify-content:center;gap:7px;margin:0 0 16px}
   .svc{flex-direction:column;gap:10px}
   .license{flex-direction:column;text-align:center;padding:16px}
   .license img{width:170px}
@@ -340,7 +342,8 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   /* phones: a calmer hero (client, 2026-10-08) - no trust line, no CTA buttons (the sticky bar carries all three from
      the first screen), tighter type, badges in two columns */
   .top{display:none} /* phones: no header at all (client, 2026-10-08) - the sticky bar carries the call button */
-  .hero{padding:28px 0 28px}
+  .hero{padding:28px 0 0} /* the testimonials strip closes the hero; a tighter gap to "what we do" (client, 2026-10-11) */
+  .info{padding-top:44px}
   .hero-ctas{display:none}
   /* phones: the headline comes first and the trust line (with its light wave) sits right under it (client, 2026-10-11).
      The text column becomes a flex column so the h1 can be ordered before the overline without duplicating markup */
@@ -355,9 +358,10 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .hero .ask span{display:block}
   .hero .tagline{font-size:.98rem;line-height:1.55;margin-bottom:0}
   .hero .lead{font-size:1rem;line-height:1.6}
-  .counters{margin-top:18px;padding-top:14px}
-  .counters b{font-size:2rem}
-  .counters span{font-size:.82rem}
+  /* phones: bigger, more prominent counters in three equal columns; they run only when scrolled into view (client, 2026-10-11) */
+  .counters{margin-top:20px;padding-top:18px;grid-template-columns:repeat(3,1fr);gap:8px 6px;text-align:center}
+  .counters b{font-size:2.75rem;text-align:center}
+  .counters span{font-size:.86rem;margin-top:6px}
   .badges{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
   .badge{font-size:.76rem;padding:7px 9px;border-radius:12px;justify-content:center;text-align:center;white-space:normal;line-height:1.3}
   .badge.lic{padding-inline-start:9px;cursor:default}
@@ -365,10 +369,15 @@ footer.site .legal-links a{font-weight:600;text-decoration:underline;text-underl
   .badge{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
   .badge.tap{animation:badge-pop .6s cubic-bezier(.2,.8,.2,1) both}
   .whisper{margin-top:12px;font-size:.9rem;text-align:start}
-  /* testimonials: all four open, as a full-bleed strip at the end of the hero (client, 2026-10-08) */
-  .tst{margin:18px -16px 0;padding:16px 16px 6px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.84)}
-  .tst-track{grid-template-columns:1fr;gap:10px}
-  .tst-item{background:#fff;border-radius:12px;padding:12px 14px;backdrop-filter:none;-webkit-backdrop-filter:none}
+  /* testimonials (phones): a titled slider, one quote per slide, auto-advancing every 1.5s with dots (client, 2026-10-11);
+     a full-bleed strip at the end of the hero */
+  .tst{margin:18px -16px 0;padding:18px 16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.84)}
+  .tst-title{display:block;font-size:1.4rem;text-align:center;color:var(--blue-d);margin:0 0 12px}
+  .tst-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:2px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .tst-track::-webkit-scrollbar{display:none}
+  .tst-item{flex:0 0 100%;scroll-snap-align:center;background:#fff;border-radius:12px;padding:14px 16px;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .tst-item blockquote{font-size:1rem}
+  .tst .sl-dots{margin:0 0 14px}
 }
 @keyframes badge-pop{0%{transform:scale(1)}40%{transform:scale(1.07);border-color:var(--blue);box-shadow:0 0 0 3px var(--sky-2),0 12px 24px -16px rgba(var(--shadow-c),.55)}100%{transform:scale(1.02);border-color:var(--blue);box-shadow:0 0 0 2px var(--sky-2)}}
 /* ---------- accessibility: skip link + self-contained widget (copied to the legal pages by build_legal.py) ---------- */
