@@ -57,6 +57,8 @@ h1,h2,h3{font-family:var(--font);font-stretch:75%;font-weight:800;line-height:1.
 p{margin:0}
 .wrap{width:min(1180px,100% - 32px);margin-inline:auto}
 .num{font-variant-numeric:tabular-nums;unicode-bidi:isolate;direction:ltr;display:inline-block}
+/* Hebrew gershayim (״) in Open Sans ends 0.1em below the letters' top line; lift it so it sits level with them (client, 2026-10-11) */
+.gq{position:relative;top:-.1em}
 
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:12px;font-weight:700;font-size:1.02rem;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;line-height:1;min-height:50px;white-space:nowrap;font-family:inherit}
@@ -438,7 +440,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
       <span class="t"><b>נטע שגיא</b><small>חקירות · מודיעין · פוליגרף</small></span>
     </a>
     <div class="hdr-cta">
-      <span class="hdr-trust" title="חוקרים וחוקרות יוצאי שב״כ ומשטרה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg><span>יוצאי שב״כ ומשטרה</span></span>
+      <span class="hdr-trust" title="חוקרים וחוקרות יוצאי שב״כ ומשטרה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg><span>יוצאי שב<span class="gq">״</span>כ ומשטרה</span></span>
       <a class="phone" href="tel:0506023000" data-track="call_header">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z"/></svg>
         <span class="num">050-602-3000</span>
@@ -455,10 +457,10 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
   </div>
   <div class="wrap">
     <div>
-      <span class="overline"><span class="wave-text">משרד חקירות מורשה ממשרד המשפטים<span class="sep-m"> · </span>יוצאי שב״כ ומשטרה</span></span>
+      <span class="overline"><span class="wave-text">משרד חקירות מורשה ממשרד המשפטים<span class="sep-m"> · </span>יוצאי שב<span class="gq">״</span>כ ומשטרה</span></span>
       <h1>נטע שגיא <span class="sep">|</span> משרד חקירות</h1>
       <p class="ask"><span>רוצים לאשש את החששות?</span> <span>רוצים הוכחות חותכות?</span></p>
-      <p class="tagline">משרדנו פועל לחשיפת הונאות עסקיות, בגידות בין בני זוג ובגידות עסקיות, ריגול עסקי ועוד, ע״י מיטב החוקרים בישראל, יוצאי שב״כ ומשטרה, מומחים במעקב דיסקרטי, דיבוב, חשיפת האמת והשגת ראיות חותכות לבית המשפט</p>
+      <p class="tagline">משרדנו פועל לחשיפת הונאות עסקיות, בגידות בין בני זוג ובגידות עסקיות, ריגול עסקי ועוד, ע<span class="gq">״</span>י מיטב החוקרים בישראל, יוצאי שב<span class="gq">״</span>כ ומשטרה, מומחים במעקב דיסקרטי, דיבוב, חשיפת האמת והשגת ראיות חותכות לבית המשפט</p>
       <!-- phones only: the clip on its own between the two paragraphs, nothing over it (on desktop it is the hero background) -->
       <div class="reel" aria-label="סרטון">
         <video id="reel" muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true" tabindex="-1"></video>
@@ -474,7 +476,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
       <div class="badges">
         <a class="badge lic lic-open" href="assets/license.jpg" target="_blank" rel="noopener" title="לחצו לצפייה ברישיון"><img src="assets/license.jpg" alt="" width="22" height="28">רישיון משרד המשפטים <span class="num">1221423</span></a>
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.2 12.6 7 22l5-3 5 3-1.2-9.4"/></svg>לשכת החוקרים הפרטיים</span>
-        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><circle cx="17" cy="9" r="3"/><path d="M2 21a7 7 0 0 1 14 0M15 21a5 5 0 0 1 7-4.6"/></svg>חוקרים וחוקרות יוצאי שב״כ ומשטרה</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><circle cx="17" cy="9" r="3"/><path d="M2 21a7 7 0 0 1 14 0M15 21a5 5 0 0 1 7-4.6"/></svg>חוקרים וחוקרות יוצאי שב<span class="gq">״</span>כ ומשטרה</span>
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>ראיות קבילות בבית משפט</span>
       </div>
 
@@ -520,7 +522,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
       <div class="svcs">
         <article class="svc lead rv">
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg></span>
-          <div><span class="k">ההתמחות שלנו</span><h3>דיבוב לצורך קבלת הודאה</h3><p>שיחה אחת נכונה שווה שבועות של מעקב. חוקרים יוצאי שב״כ ומשטרה מדובבים בשטח, בטלפון ובפגישות יזומות, בכלים חוקיים בלבד, ומביאים הודאה או מידע שאפשר לפעול לפיו.</p></div>
+          <div><span class="k">ההתמחות שלנו</span><h3>דיבוב לצורך קבלת הודאה</h3><p>שיחה אחת נכונה שווה שבועות של מעקב. חוקרים יוצאי שב<span class="gq">״</span>כ ומשטרה מדובבים בשטח, בטלפון ובפגישות יזומות, בכלים חוקיים בלבד, ומביאים הודאה או מידע שאפשר לפעול לפיו.</p></div>
         </article>
         <article class="svc rv d1">
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
@@ -539,8 +541,8 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
       </div>
       <ul class="why" data-sl="ארבע סיבות" data-sl-item="סיבה">
         <li class="rv"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/></svg></span><b>חשאיות מוחלטת</b><span>אף אחד לא יידע שפניתם. כל פרט נשמר בסודיות, גם אחרי סיום החקירה. חוזרים ממספר רגיל ולא מזדהים כמשרד חקירות.</span></li>
-        <li class="rv d1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><circle cx="17" cy="9" r="3"/><path d="M2 21a7 7 0 0 1 14 0M15 21a5 5 0 0 1 7-4.6"/></svg></span><b>יוצאי שב״כ ומשטרה</b><span>חוקרים וחוקרות שהגיעו מהמקומות שבהם אין מקום לטעויות. חוקרת פרטית מגיעה למקומות ולשיחות שחוקר לא יכול.</span></li>
-        <li class="rv d2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>30 שנות ניסיון</b><span>למעלה מ-4,300 חקירות מורכבות, 97% הצלחה, בארץ ובחו״ל. עדכונים בזמן אמת, לא רק בסוף.</span></li>
+        <li class="rv d1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><circle cx="17" cy="9" r="3"/><path d="M2 21a7 7 0 0 1 14 0M15 21a5 5 0 0 1 7-4.6"/></svg></span><b>יוצאי שב<span class="gq">״</span>כ ומשטרה</b><span>חוקרים וחוקרות שהגיעו מהמקומות שבהם אין מקום לטעויות. חוקרת פרטית מגיעה למקומות ולשיחות שחוקר לא יכול.</span></li>
+        <li class="rv d2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>30 שנות ניסיון</b><span>למעלה מ-4,300 חקירות מורכבות, 97% הצלחה, בארץ ובחו<span class="gq">״</span>ל. עדכונים בזמן אמת, לא רק בסוף.</span></li>
         <li class="rv d3"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span><b>מקצועיות שעומדת במבחן</b><span>רישיון משרד המשפטים, ליווי עורך דין, דוח מסודר עם תיעוד, ועדות החוקר בבית המשפט במידת הצורך.</span></li>
       </ul>
       <div class="cta-box rv">
@@ -621,7 +623,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
 <footer class="site">
   <div class="wrap">
     <div class="vets">
-      <span class="vets-cap">חוקרים יוצאי משטרה ושב״כ</span>
+      <span class="vets-cap">חוקרים יוצאי משטרה ושב<span class="gq">״</span>כ</span>
       <img src="assets/logo/police.png" alt="משטרת ישראל" width="53" height="48" loading="lazy">
       <img class="shabak" src="assets/logo/shabak.png" alt="שירות הביטחון הכללי" width="86" height="67" loading="lazy">
     </div>
@@ -771,7 +773,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
       new IntersectionObserver(function(es){ es.forEach(function(e){ seen = e.isIntersecting; if (seen) start(); else stop(); }); }, {threshold:.4}).observe(track);
     } else { start(); }
   }
-  makeSlider(document.querySelector('.why'), 1500);
+  makeSlider(document.querySelector('.why'), 2500); /* slowed from 1.5s (client, 2026-10-11) */
   makeSlider(document.querySelector('.tst-track'), 1500);
 
   /* ---- hero counters: run on load ---- */
