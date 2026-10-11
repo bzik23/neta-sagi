@@ -409,8 +409,14 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
 /* ---------- mobile reel: full-bleed clip between the hero's two paragraphs ---------- */
 .reel{display:none}
 @media (max-width:720px) and (prefers-reduced-motion:no-preference){
-  .reel{display:block;margin:16px -16px 18px;border-radius:0}
-  .reel video{display:block;width:100%;height:auto;aspect-ratio:1024/832;object-fit:cover;background:var(--sky-3)}
+  /* phones: the clip melts into the hero like on desktop (client, 2026-10-11) - the same desaturation and blue tint,
+     and a mask that fades all four edges into the light background, so there is no hard rectangle */
+  .reel{display:block;position:relative;margin:2px -16px 4px;border-radius:0;
+    -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 0%,#000 20%,#000 80%,rgba(0,0,0,0) 100%),linear-gradient(to right,rgba(0,0,0,0) 0%,#000 16%,#000 84%,rgba(0,0,0,0) 100%);
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 0%,#000 20%,#000 80%,rgba(0,0,0,0) 100%),linear-gradient(to right,rgba(0,0,0,0) 0%,#000 16%,#000 84%,rgba(0,0,0,0) 100%);
+    -webkit-mask-composite:source-in;mask-composite:intersect}
+  .reel video{display:block;width:100%;height:auto;aspect-ratio:1024/832;object-fit:cover;background:transparent;filter:saturate(.55) contrast(.95)}
+  .reel::after{content:"";position:absolute;inset:0;background:var(--tint);mix-blend-mode:multiply;pointer-events:none}
 }
 </style>
 </head>
@@ -443,7 +449,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
       <span class="overline"><span class="wave-text">משרד חקירות מורשה ממשרד המשפטים<span class="sep-m"> · </span>יוצאי שב״כ ומשטרה</span></span>
       <h1>נטע שגיא <span class="sep">|</span> משרד חקירות</h1>
       <p class="ask"><span>רוצים לאשש את החששות?</span> <span>רוצים הוכחות חותכות?</span></p>
-      <p class="tagline">חשיפת הונאות עסקיות, בגידות בין בני זוג ובגידות עסקיות, ריגול עסקי ועוד, ע״י מיטב החוקרים בישראל, יוצאי שב״כ ומשטרה, מומחים במעקב דיסקרטי, דיבוב, חשיפת האמת והשגת ראיות חותכות לבית המשפט</p>
+      <p class="tagline">משרדנו פועל לחשיפת הונאות עסקיות, בגידות בין בני זוג ובגידות עסקיות, ריגול עסקי ועוד, ע״י מיטב החוקרים בישראל, יוצאי שב״כ ומשטרה, מומחים במעקב דיסקרטי, דיבוב, חשיפת האמת והשגת ראיות חותכות לבית המשפט</p>
       <!-- phones only: the clip on its own between the two paragraphs, nothing over it (on desktop it is the hero background) -->
       <div class="reel" aria-label="סרטון">
         <video id="reel" muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true" tabindex="-1"></video>
