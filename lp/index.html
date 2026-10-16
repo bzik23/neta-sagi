@@ -228,6 +228,23 @@ p{margin:0}
 .field input[type=tel],.field input[type=email]{direction:ltr;text-align:right}
 .field label .opt{font-weight:500;opacity:.8}
 .field select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235E6B7A' stroke-width='2.5'><path d='m6 9 6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:left 14px center;padding-inline-start:38px}
+/* friendly custom dropdown - "when is convenient to call back" */
+.cbk{position:relative}
+.cbk-trigger{width:100%;display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--sky);color:var(--text);border-radius:10px;padding:13px 14px;font:inherit;font-size:1rem;text-align:start;cursor:pointer;transition:border-color .2s ease,box-shadow .2s ease}
+.cbk-trigger:hover{border-color:var(--blue)}
+.cbk.open .cbk-trigger,.cbk-trigger:focus-visible{border-color:var(--blue);box-shadow:0 0 0 3px var(--sky-2);outline:none}
+.cbk-ic{width:19px;height:19px;color:var(--cyan);flex:none}
+.cbk-value{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;unicode-bidi:plaintext;text-align:right}
+.cbk-chev{width:18px;height:18px;color:var(--muted);flex:none;transition:transform .25s ease,color .2s ease}
+.cbk.open .cbk-chev{transform:rotate(180deg);color:var(--blue)}
+.cbk-panel{position:absolute;z-index:40;top:calc(100% + 8px);inset-inline:0;background:#fff;border:1px solid var(--sky);border-radius:12px;box-shadow:0 26px 54px -26px rgba(var(--shadow-c),.55);padding:6px;max-height:264px;overflow-y:auto;overscroll-behavior:contain;opacity:0;transform:translateY(-6px) scale(.985);transform-origin:top;pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.cbk.open .cbk-panel{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.cbk-group{font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--muted);padding:9px 12px 3px}
+.cbk-opt{padding:11px 12px;border-radius:8px;font-size:.95rem;color:var(--text);cursor:pointer;transition:background .14s ease,color .14s ease;outline:none;unicode-bidi:plaintext;text-align:right}
+.cbk-opt:hover,.cbk-opt:focus-visible{background:var(--sky-2)}
+.cbk-opt.is-sel{background:var(--sky-2);color:var(--blue);font-weight:700}
+.cbk-panel::-webkit-scrollbar{width:8px}
+.cbk-panel::-webkit-scrollbar-thumb{background:var(--sky);border-radius:8px}
 .field .err{display:none;color:#C62828;font-size:.82rem;margin-top:6px}
 .field.invalid input{border-color:#E06C6C}
 .field.invalid .err{display:block}
@@ -588,6 +605,38 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
           <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05X-XXX-XXXX">
           <div class="err">נא להזין מספר טלפון תקין</div>
         </div>
+        <div class="field">
+          <label id="cbkLabel">מתי נוח לכם שנחזור בשיחה? <span class="opt">(לא חובה)</span></label>
+          <div class="cbk" id="cbk">
+            <button type="button" class="cbk-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="cbkLabel">
+              <svg class="cbk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <span class="cbk-value">בכל שעה שנוחה לכם</span>
+              <svg class="cbk-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="cbk-panel" role="listbox" aria-labelledby="cbkLabel">
+              <div class="cbk-opt is-sel" role="option" aria-selected="true" tabindex="0" data-v="בכל שעה שנוחה לכם">בכל שעה שנוחה לכם</div>
+              <div class="cbk-group">בוקר</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="08:00–09:00">08:00–09:00</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="09:00–10:00">09:00–10:00</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="10:00–11:00">10:00–11:00</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="11:00–12:00">11:00–12:00</div>
+              <div class="cbk-group">צהריים</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="12:00–13:00">12:00–13:00</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="13:00–14:00">13:00–14:00</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="14:00–15:00">14:00–15:00</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="15:00–16:00">15:00–16:00</div>
+              <div class="cbk-group">אחר הצהריים</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="16:00–17:00">16:00–17:00</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="17:00–18:00">17:00–18:00</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="18:00–19:00">18:00–19:00</div>
+              <div class="cbk-group">ערב</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="19:00–20:00">19:00–20:00</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="20:00–21:00">20:00–21:00</div>
+              <div class="cbk-opt" role="option" tabindex="0" data-v="21:00–22:00">21:00–22:00</div>
+            </div>
+            <input type="hidden" name="callback" value="בכל שעה שנוחה לכם">
+          </div>
+        </div>
         <div class="field consent">
           <label class="check" for="consent"><input id="consent" name="consent" type="checkbox" value="1"><span>אני מאשר/ת את <a href="privacy" target="_blank" rel="noopener">מדיניות הפרטיות</a> ומסכים/ה לשימוש כמפורט בה <b class="req" aria-hidden="true">*</b></span></label>
           <div class="err">כדי לשלוח יש לאשר את מדיניות הפרטיות</div>
@@ -868,8 +917,13 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
     if (!okName || !okPhone || !okConsent){ (!okName ? name : (!okPhone ? phone : consent)).focus(); return; }
     if (form.website.value) return; /* honeypot */
     var btn = form.querySelector('button[type=submit]'); btn.disabled = true; btn.textContent = 'שולח...';
+    /* pretty local format so mobile mail apps auto-link it to tap-to-call; 📞 is the quick-dial icon */
+    var local = digits.replace(/^972/, '0'); if (local.charAt(0) !== '0') local = '0' + local;
+    var pretty = local.length === 10 ? local.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
+               : local.length === 9  ? local.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3')
+               : local;
     var payload = {
-      name:name.value.trim(), phone:digits, page:location.href,
+      name:name.value.trim(), phone:'📞 ' + pretty, callback:form.callback.value, page:location.href,
       /* FormSubmit options: subject line, table layout, no captcha page */
       _subject:'ליד חדש מעמוד הנחיתה - נטע גרופ', _template:'table', _captcha:'false',
       _cc:'neta.sagi.pi' + '@' + 'gmail.com' + ',tech.netapi' + '@' + 'outlook.com' + ',bzik23' + '@' + 'gmail.com' /* client inboxes + bzik copy; comma-separated, assembled so address harvesters skip it */
@@ -888,6 +942,30 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
         .then(finish).catch(function(){ btn.disabled=false; btn.textContent='שלחו עכשיו'; alert('משהו השתבש. אפשר להתקשר אלינו ישירות: 050-602-3000'); });
     } else { setTimeout(finish, 500); }
   });
+
+  /* ---- friendly callback-time dropdown ---- */
+  var cbk = document.getElementById('cbk');
+  if (cbk){
+    var trigger = cbk.querySelector('.cbk-trigger'),
+        panel = cbk.querySelector('.cbk-panel'),
+        valueEl = cbk.querySelector('.cbk-value'),
+        hidden = cbk.querySelector('input[name="callback"]'),
+        opts = Array.prototype.slice.call(cbk.querySelectorAll('.cbk-opt'));
+    function openCbk(){ cbk.classList.add('open'); trigger.setAttribute('aria-expanded','true'); }
+    function closeCbk(){ cbk.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); }
+    function choose(opt){
+      opts.forEach(function(o){ o.classList.remove('is-sel'); o.setAttribute('aria-selected','false'); });
+      opt.classList.add('is-sel'); opt.setAttribute('aria-selected','true');
+      valueEl.textContent = opt.textContent; hidden.value = opt.dataset.v;
+    }
+    trigger.addEventListener('click', function(){ cbk.classList.contains('open') ? closeCbk() : openCbk(); });
+    opts.forEach(function(opt){
+      opt.addEventListener('click', function(){ choose(opt); closeCbk(); trigger.focus(); });
+      opt.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); choose(opt); closeCbk(); trigger.focus(); } });
+    });
+    document.addEventListener('click', function(e){ if (!cbk.contains(e.target)) closeCbk(); });
+    cbk.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ closeCbk(); trigger.focus(); } });
+  }
 })();
 </script>
 </body>
