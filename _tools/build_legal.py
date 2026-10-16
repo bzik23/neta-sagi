@@ -125,7 +125,7 @@ PRIVACY = """
     <p>אנחנו עשויים לעדכן מדיניות זו מעת לעת. הנוסח המחייב הוא זה המפורסם בעמוד זה, ותאריך העדכון האחרון מופיע בראשו.</p>
 
     <h2>10. יצירת קשר</h2>
-    <p>לכל שאלה או בקשה בנושא פרטיות: נטע שגיא - חקירות, מודיעין ופוליגרף, טלפון <a href="tel:0506023000" dir="ltr">050-602-3000</a>, דוא״ל <a href="mailto:neta.sagi.pi@gmail.com">neta.sagi.pi@gmail.com</a>.</p>
+    <p>לכל שאלה או בקשה בנושא פרטיות: נטע שגיא - חקירות, מודיעין ופוליגרף, טלפון <a href="tel:0506023000" dir="ltr">050-602-3000</a>, דוא״ל <a href="mailto:info@netagroup.co.il">info@netagroup.co.il</a>.</p>
 """
 
 ACCESS = """
@@ -162,7 +162,7 @@ ACCESS = """
     <div class="box">
       <p style="margin:0 0 6px"><strong>רכזת הנגישות:</strong> נטע שגיא</p>
       <p style="margin:0 0 6px"><strong>טלפון:</strong> <a href="tel:0506023000" dir="ltr">050-602-3000</a></p>
-      <p style="margin:0"><strong>דוא״ל:</strong> <a href="mailto:neta.sagi.pi@gmail.com">neta.sagi.pi@gmail.com</a></p>
+      <p style="margin:0"><strong>דוא״ל:</strong> <a href="mailto:info@netagroup.co.il">info@netagroup.co.il</a></p>
     </div>
 """
 
