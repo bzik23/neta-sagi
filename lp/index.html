@@ -926,10 +926,10 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
       name:name.value.trim(), phone:'📞 ' + pretty, callback:form.callback.value, page:location.href,
       /* FormSubmit options: subject line, table layout, no captcha page */
       _subject:'ליד חדש מעמוד הנחיתה - נטע גרופ', _template:'table', _captcha:'false',
-      _cc:'neta.sagi.pi' + '@' + 'gmail.com' + ',tech.netapi' + '@' + 'outlook.com' + ',bzik23' + '@' + 'gmail.com' /* client inboxes + bzik copy; comma-separated, assembled so address harvesters skip it */
+      _cc:'neta.sagi.pi' + '@' + 'gmail.com' + ',info' + '@' + 'netagroup.co.il' + ',tech.netapi' + '@' + 'outlook.com' + ',bzik23' + '@' + 'gmail.com' /* client inboxes (neta's gmail + business info@) + bzik copy; comma-separated, assembled so address harvesters skip it */
     };
-    /* Primary recipient = info@netagroup.co.il; assembled in JS to keep the address out of the static (public) HTML */
-    var ep = 'https://formsubmit.co/ajax/' + 'info' + '@' + 'netagroup.co.il';
+    /* Primary = the ACTIVATED FormSubmit alias of bzik23@gmail.com for netagroup.co.il (confirmed 13/10). A naked recipient address would need its own activation per domain; the client inboxes above receive as CC (CC needs no activation). */
+    var ep = 'https://formsubmit.co/ajax/' + 'e4fb122e133e6477b7010e78b7957c8e';
     var finish = function(){
       box.classList.add('sent'); track('generate_lead');
       /* Google Ads conversion - fires only on a confirmed successful submit */
