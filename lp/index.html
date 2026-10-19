@@ -205,7 +205,7 @@ p{margin:0}
 .why .ic{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.16);display:grid;place-items:center}
 .why .ic svg{width:24px;height:24px;color:#fff}
 .why b{display:block;font-stretch:75%;font-weight:800;font-size:1.25rem;line-height:1.15}
-.why span{font-size:.9rem;line-height:1.45;color:#E6F3FA}
+.why li>span{font-size:.9rem;line-height:1.45;color:#E6F3FA}
 .license{display:flex;gap:16px;align-items:center;margin-top:0;background:#fff;border:1.5px solid var(--sky);border-radius:14px;padding:12px 14px;text-decoration:none;cursor:zoom-in;transition:box-shadow .2s ease,border-color .2s ease}
 .license:hover{border-color:var(--blue);box-shadow:0 16px 32px -22px rgba(var(--shadow-c),.5)}
 .license img{width:96px;height:auto;border-radius:6px;border:1px solid var(--sky);box-shadow:0 6px 14px -8px rgba(0,0,0,.35);flex:none}
@@ -893,15 +893,46 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
   function onScroll(){ bar.classList.toggle('show', mobile || window.scrollY > hero.offsetHeight - 160); }
   window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
-  /* ---- tracking hooks (Google Ads / GA4) ---- */
+  /* ---- traffic source (ad / organic / direct), resolved once ---- */
+  var LEADS_API = '/leads/api.php';
+  var nsSrc = (function(){
+    try{
+      var q = new URLSearchParams(location.search);
+      var ref = document.referrer || '', host = '';
+      try{ host = ref ? new URL(ref).hostname : ''; }catch(e){}
+      var us = (q.get('utm_source')||'').toLowerCase(), um = (q.get('utm_medium')||'').toLowerCase();
+      var ch='direct', chl='ישיר';
+      if (q.get('gclid') || q.get('gbraid') || q.get('wbraid') || q.get('gad_source') || (us==='google' && /cpc|ppc|paid/.test(um))){ ch='google_paid'; chl='גוגל ממומן'; }
+      else if (q.get('fbclid') || us==='facebook' || us==='fb' || us==='instagram' || us==='ig'){ ch='facebook'; chl='פייסבוק'; }
+      else if (us){ ch='campaign'; chl='קמפיין'; }
+      else if (/google\./.test(host)){ ch='google_organic'; chl='גוגל אורגני'; }
+      else if (/bing\.|duckduckgo\.|yahoo\./.test(host)){ ch='search_organic'; chl='חיפוש אורגני'; }
+      else if (host && host.indexOf(location.hostname)===-1){ ch='referral'; chl='הפניה'; }
+      return {ch:ch, chl:chl, lp:location.pathname + location.search};
+    }catch(e){ return {ch:'direct', chl:'ישיר', lp:location.pathname}; }
+  })();
+
+  /* ---- tracking hooks (Google Ads / GA4 + server-side lead log) ---- */
   function track(name, extra){
     try{
       if (window.gtag) gtag('event', name, extra||{});
       if (window.dataLayer) dataLayer.push(Object.assign({event:name}, extra||{}));
     }catch(e){}
   }
+  /* every call/whatsapp tap is a lead - log it to our dashboard, not only to GA */
+  function logHit(ch, placement){
+    try{
+      var body = JSON.stringify({ch:ch, placement:placement||'', src:nsSrc.ch, chl:nsSrc.chl, lp:nsSrc.lp});
+      if (navigator.sendBeacon){ navigator.sendBeacon(LEADS_API + '?hit', new Blob([body], {type:'application/json'})); }
+      else { fetch(LEADS_API + '?hit', {method:'POST', headers:{'Content-Type':'application/json'}, body:body, keepalive:true}); }
+    }catch(e){}
+  }
   document.querySelectorAll('[data-track]').forEach(function(a){
-    a.addEventListener('click', function(){ track(a.dataset.track.indexOf('call')===0 ? 'click_call' : 'click_whatsapp', {placement:a.dataset.track}); });
+    a.addEventListener('click', function(){
+      var isCall = a.dataset.track.indexOf('call')===0;
+      track(isCall ? 'click_call' : 'click_whatsapp', {placement:a.dataset.track});
+      logHit(isCall ? 'call' : 'wa', a.dataset.track);
+    });
   });
 
   /* ---- lead form ---- */
@@ -923,7 +954,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
                : local.length === 9  ? local.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3')
                : local;
     var payload = {
-      name:name.value.trim(), phone:'📞 ' + pretty, callback:form.callback.value, page:location.href,
+      name:name.value.trim(), phone:'📞 ' + pretty, callback:form.callback.value, page:location.href, 'מקור':nsSrc.chl,
       /* FormSubmit options: subject line, table layout, no captcha page */
       _subject:'ליד חדש מעמוד הנחיתה - נטע גרופ', _template:'table', _captcha:'false',
       _cc:'neta.sagi.pi' + '@' + 'gmail.com' + ',info' + '@' + 'netagroup.co.il' + ',tech.netapi' + '@' + 'outlook.com' + ',bzik23' + '@' + 'gmail.com' /* client inboxes (neta's gmail + business info@) + bzik copy; comma-separated, assembled so address harvesters skip it */
