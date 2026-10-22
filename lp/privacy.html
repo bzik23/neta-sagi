@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KDP6GJLZ');</script>
+<!-- End Google Tag Manager -->
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KV5CG2K67"></script>
 <script>
@@ -12,8 +19,8 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>מדיניות פרטיות | נטע גרופ</title>
-<meta name="description" content="מדיניות הפרטיות של אתר נטע גרופ - חקירות, מודיעין ופוליגרף: איזה מידע נאסף, למה, וכיצד הוא נשמר.">
+<title>מדיניות פרטיות | נטע שגיא</title>
+<meta name="description" content="מדיניות הפרטיות של אתר נטע שגיא - חקירות, מודיעין ופוליגרף: איזה מידע נאסף, למה, וכיצד הוא נשמר.">
 <meta name="robots" content="noindex, follow">
 <link rel="icon" href="assets/favicon.png">
 <meta property="og:title" content="נטע גרופ | משרד חקירות, דיבוב ומעקבים">
@@ -66,8 +73,8 @@ h1,h2,h3{font-family:var(--font);font-stretch:75%;font-weight:800;line-height:1.
 p{margin:0}
 .wrap{width:min(1180px,100% - 32px);margin-inline:auto}
 .num{font-variant-numeric:tabular-nums;unicode-bidi:isolate;direction:ltr;display:inline-block}
-/* Hebrew gershayim (״) in Open Sans ends 0.1em below the letters' top line; lift it so it sits level with them (client, 2026-10-11) */
-.gq{position:relative;top:-.1em}
+/* Gershayim/geresh use ASCII " / ' (U+0022/U+0027): Open Sans' Hebrew web subset has NO glyph for U+05F4/U+05F3 yet its unicode-range still claims U+0590-05FF, so the real marks render as a blank gap on some mobiles. ASCII " / ' come from Open Sans' Latin subset (always present). LIFT IS vertical-align, NOT position:relative: inside .overline .wave-text the text is painted via -webkit-background-clip:text with transparent fill, and a position:relative child drops out of that clipped paint and turns invisible (that was the real "שב כ" gap on the client's phone, 2026-10-22). vertical-align stays in the text flow, so the mark is painted. */
+.gq{vertical-align:.05em}
 
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:12px;font-weight:700;font-size:1.02rem;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;line-height:1;min-height:50px;white-space:nowrap;font-family:inherit}
@@ -205,7 +212,7 @@ p{margin:0}
 .why .ic{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.16);display:grid;place-items:center}
 .why .ic svg{width:24px;height:24px;color:#fff}
 .why b{display:block;font-stretch:75%;font-weight:800;font-size:1.25rem;line-height:1.15}
-.why span{font-size:.9rem;line-height:1.45;color:#E6F3FA}
+.why li>span{font-size:.9rem;line-height:1.45;color:#E6F3FA}
 .license{display:flex;gap:16px;align-items:center;margin-top:0;background:#fff;border:1.5px solid var(--sky);border-radius:14px;padding:12px 14px;text-decoration:none;cursor:zoom-in;transition:box-shadow .2s ease,border-color .2s ease}
 .license:hover{border-color:var(--blue);box-shadow:0 16px 32px -22px rgba(var(--shadow-c),.5)}
 .license img{width:96px;height:auto;border-radius:6px;border:1px solid var(--sky);box-shadow:0 6px 14px -8px rgba(0,0,0,.35);flex:none}
@@ -228,6 +235,23 @@ p{margin:0}
 .field input[type=tel],.field input[type=email]{direction:ltr;text-align:right}
 .field label .opt{font-weight:500;opacity:.8}
 .field select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235E6B7A' stroke-width='2.5'><path d='m6 9 6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:left 14px center;padding-inline-start:38px}
+/* friendly custom dropdown - "when is convenient to call back" */
+.cbk{position:relative}
+.cbk-trigger{width:100%;display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--sky);color:var(--text);border-radius:10px;padding:13px 14px;font:inherit;font-size:1rem;text-align:start;cursor:pointer;transition:border-color .2s ease,box-shadow .2s ease}
+.cbk-trigger:hover{border-color:var(--blue)}
+.cbk.open .cbk-trigger,.cbk-trigger:focus-visible{border-color:var(--blue);box-shadow:0 0 0 3px var(--sky-2);outline:none}
+.cbk-ic{width:19px;height:19px;color:var(--cyan);flex:none}
+.cbk-value{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;unicode-bidi:plaintext;text-align:right}
+.cbk-chev{width:18px;height:18px;color:var(--muted);flex:none;transition:transform .25s ease,color .2s ease}
+.cbk.open .cbk-chev{transform:rotate(180deg);color:var(--blue)}
+.cbk-panel{position:absolute;z-index:40;top:calc(100% + 8px);inset-inline:0;background:#fff;border:1px solid var(--sky);border-radius:12px;box-shadow:0 26px 54px -26px rgba(var(--shadow-c),.55);padding:6px;max-height:264px;overflow-y:auto;overscroll-behavior:contain;opacity:0;transform:translateY(-6px) scale(.985);transform-origin:top;pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.cbk.open .cbk-panel{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.cbk-group{font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--muted);padding:9px 12px 3px}
+.cbk-opt{padding:11px 12px;border-radius:8px;font-size:.95rem;color:var(--text);cursor:pointer;transition:background .14s ease,color .14s ease;outline:none;unicode-bidi:plaintext;text-align:right}
+.cbk-opt:hover,.cbk-opt:focus-visible{background:var(--sky-2)}
+.cbk-opt.is-sel{background:var(--sky-2);color:var(--blue);font-weight:700}
+.cbk-panel::-webkit-scrollbar{width:8px}
+.cbk-panel::-webkit-scrollbar-thumb{background:var(--sky);border-radius:8px}
 .field .err{display:none;color:#C62828;font-size:.82rem;margin-top:6px}
 .field.invalid input{border-color:#E06C6C}
 .field.invalid .err{display:block}
@@ -462,14 +486,18 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
 
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDP6GJLZ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="נטע גרופ חקירות">
+    <a class="brand" href="index.html" aria-label="נטע גרופ חקירות">
       <span class="t"><b>נטע גרופ</b><small>חקירות · מודיעין · פוליגרף</small></span>
     </a>
     <div class="hdr-cta">
-      <span class="hdr-trust" title="חוקרים וחוקרות יוצאי שב״כ ומשטרה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg><span>יוצאי <span class="nb">שב<span class="gq">״</span>כ</span> ומשטרה</span></span>
+      <span class="hdr-trust" title="חוקרים וחוקרות יוצאי שב״כ ומשטרה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg><span>יוצאי <span class="nb">שב<span class="gq">"</span>כ</span> ומשטרה</span></span>
       <a class="phone" href="tel:0506023000" data-track="call_header">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z"/></svg>
         <span class="num">050-602-3000</span>
@@ -484,7 +512,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
     <h1>מדיניות פרטיות</h1>
     <p class="meta">עודכן לאחרונה: 8 באוקטובר 2026</p>
 
-    <p>נטע גרופ - חקירות, מודיעין ופוליגרף (ח.פ. 516910031), להלן "המשרד" או "אנחנו", מכבדת את פרטיותכם. מסמך זה מסביר איזה מידע נאסף באתר זה, לאיזו מטרה, כיצד הוא נשמר ואילו זכויות יש לכם. השימוש באתר ומסירת פרטים דרכו מהווים הסכמה למדיניות זו. המדיניות מנוסחת בלשון רבים מטעמי נוחות ומופנית לכל המגדרים.</p>
+    <p>נטע שגיא - חקירות, מודיעין ופוליגרף (ח.פ. 516910031), להלן "המשרד" או "אנחנו", מכבדת את פרטיותכם. מסמך זה מסביר איזה מידע נאסף באתר זה, לאיזו מטרה, כיצד הוא נשמר ואילו זכויות יש לכם. השימוש באתר ומסירת פרטים דרכו מהווים הסכמה למדיניות זו. המדיניות מנוסחת בלשון רבים מטעמי נוחות ומופנית לכל המגדרים.</p>
 
     <div class="box"><p style="margin:0"><strong>בקצרה:</strong> אנחנו אוספים רק את מה שצריך כדי לחזור אליכם לשיחת ייעוץ. הפרטים לא נמכרים ולא מועברים לגורמים מפרסמים. הפנייה והשיחה מטופלות בסודיות מוחלטת, כמתחייב מרישיון משרד המשפטים למשרד חקירות פרטיות.</p></div>
 
@@ -526,16 +554,16 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xml
     <p>אנחנו עשויים לעדכן מדיניות זו מעת לעת. הנוסח המחייב הוא זה המפורסם בעמוד זה, ותאריך העדכון האחרון מופיע בראשו.</p>
 
     <h2>10. יצירת קשר</h2>
-    <p>לכל שאלה או בקשה בנושא פרטיות: נטע גרופ - חקירות, מודיעין ופוליגרף, טלפון <a href="tel:0506023000" dir="ltr">050-602-3000</a>, דוא״ל <a href="mailto:info@netagroup.co.il">info@netagroup.co.il</a>.</p>
+    <p>לכל שאלה או בקשה בנושא פרטיות: נטע שגיא - חקירות, מודיעין ופוליגרף, טלפון <a href="tel:0506023000" dir="ltr">050-602-3000</a>, דוא״ל <a href="mailto:info@netagroup.co.il">info@netagroup.co.il</a>.</p>
 
-    <a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>חזרה לעמוד הראשי</a>
+    <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>חזרה לעמוד הראשי</a>
   </div>
 </main>
 
 <footer class="site">
   <div class="wrap">
     <div class="vets">
-      <span class="vets-cap">חוקרים יוצאי משטרה <span class="nb">ושב<span class="gq">״</span>כ</span></span>
+      <span class="vets-cap">חוקרים יוצאי משטרה <span class="nb">ושב<span class="gq">"</span>כ</span></span>
       <img src="assets/logo/police.png" alt="משטרת ישראל" width="53" height="48" loading="lazy">
       <img class="shabak" src="assets/logo/shabak.png" alt="שירות הביטחון הכללי" width="86" height="67" loading="lazy">
     </div>
