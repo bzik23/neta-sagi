@@ -66,8 +66,8 @@ h1,h2,h3{font-family:var(--font);font-stretch:75%;font-weight:800;line-height:1.
 p{margin:0}
 .wrap{width:min(1180px,100% - 32px);margin-inline:auto}
 .num{font-variant-numeric:tabular-nums;unicode-bidi:isolate;direction:ltr;display:inline-block}
-/* Gershayim/geresh use ASCII " / ' (U+0022/U+0027) because Open Sans' Hebrew web subset has NO glyph for U+05F4/U+05F3 and its unicode-range still claims U+0590-05FF, so the proper Hebrew marks render as a blank gap on mobile (client's phone, 2026-10-22). ASCII " / ' come from Open Sans' Latin subset (always present), and a tiny lift seats them at the Hebrew letters' top line. */
-.gq{position:relative;top:-.04em}
+/* Gershayim/geresh use ASCII " / ' (U+0022/U+0027): Open Sans' Hebrew web subset has NO glyph for U+05F4/U+05F3 yet its unicode-range still claims U+0590-05FF, so the real marks render as a blank gap on some mobiles. ASCII " / ' come from Open Sans' Latin subset (always present). LIFT IS vertical-align, NOT position:relative: inside .overline .wave-text the text is painted via -webkit-background-clip:text with transparent fill, and a position:relative child drops out of that clipped paint and turns invisible (that was the real "שב כ" gap on the client's phone, 2026-10-22). vertical-align stays in the text flow, so the mark is painted. */
+.gq{vertical-align:.05em}
 
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:12px;font-weight:700;font-size:1.02rem;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;line-height:1;min-height:50px;white-space:nowrap;font-family:inherit}
